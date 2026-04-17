@@ -177,14 +177,12 @@ svg.ic{width:16px;height:16px;display:block}
 .ltile-expand:active{transform:scale(0.96);box-shadow:var(--sh-in-sm)}
 .ltile-detail{max-height:0;overflow:hidden;transition:max-height .25s ease}
 .ltile-detail.open{max-height:500px}
-.ltile-detail-inner{padding:0 14px 14px;border-top:1px solid var(--br)}
-.drow{display:flex;gap:6px;padding:6px 0;font-size:12px;border-bottom:1px solid var(--br)}
-.drow:last-child{border-bottom:none}
-.dlbl{color:var(--tx3);min-width:90px;flex-shrink:0}
-.dval{color:var(--tx2);font-weight:500}
+.ltile-detail-inner{padding:12px 14px;border-top:1px solid var(--br);display:flex;flex-direction:column;gap:8px}
+.drow{display:flex;flex-direction:column;gap:2px;padding:0;font-size:12px;border:none}
+.dlbl{color:var(--tx3);font-size:11px}
+.dval{color:var(--tx2);font-weight:500;line-height:1.4}
 
 @media(max-width:420px){
-  .dlbl{min-width:80px}
 }
 .warn-row{
   display:flex;gap:8px;padding:8px 12px;
