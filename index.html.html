@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Китай 2026</title>
+<meta name="description" content="Маршрут поездки в Китай — апрель–май 2026">
+<meta name="theme-color" content="#1a1a18" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Китай 2026">
+<link rel="apple-touch-icon" href="#" id="apple-icon">
+<link rel="manifest" id="manifest-link">
+<style>
+:root{
+  --bg:#ffffff;--bg2:#f5f5f2;--bg3:#eeece6;
+  --tx:#1a1a18;--tx2:#5f5e5a;--tx3:#888780;
+  --br:rgba(0,0,0,0.12);--br2:rgba(0,0,0,0.22);
+  --rmd:8px;--rlg:12px;
+  --f:system-ui,-apple-system,sans-serif;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#1e1e1c;--bg2:#2a2a27;--bg3:#333330;
+    --tx:#e8e6de;--tx2:#a8a69e;--tx3:#6e6d67;
+    --br:rgba(255,255,255,0.1);--br2:rgba(255,255,255,0.18);
+  }
+  .bp{background:#0c447c!important;color:#b5d4f4!important}
+  .bt{background:#27500a!important;color:#c0dd97!important}
+  .bf{background:#085041!important;color:#9fe1cb!important}
+  .bw{background:#633806!important;color:#fac775!important}
+  .ip{background:#0c447c!important}.itr{background:#27500a!important}.ifa{background:#085041!important}
+  .ip svg path{fill:#85b7eb!important}
+  .itr svg rect{fill:#c0dd97!important;stroke:#c0dd97!important}
+  .itr svg line{stroke:#c0dd97!important}
+  .ifa svg path,.ifa svg line{stroke:#9fe1cb!important}
+  .warn-row{background:#3a2200!important;color:#fac775!important}
+}
+*{box-sizing:border-box;margin:0;padding:0}
+
+#preloader{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
+  transition:opacity .4s ease;
+}
+#preloader.hidden{opacity:0;pointer-events:none}
+.pl-icon{width:72px;height:72px;border-radius:20px;background:#1D9E75;display:flex;align-items:center;justify-content:center}
+.pl-label{font-family:var(--f);font-size:13px;color:var(--tx3);letter-spacing:.02em}
+.pl-dots{display:flex;gap:7px}
+.pl-dot{width:7px;height:7px;border-radius:50%;background:#1D9E75;animation:pdot 1.2s ease-in-out infinite}
+.pl-dot:nth-child(2){animation-delay:.18s}
+.pl-dot:nth-child(3){animation-delay:.36s}
+@keyframes pdot{0%,80%,100%{transform:scale(0.6);opacity:.3}40%{transform:scale(1);opacity:1}}
+
+body{
+  background:var(--bg);color:var(--tx);
+  font-family:var(--f);
+  padding:max(env(safe-area-inset-top),1rem) 1.5rem max(env(safe-area-inset-bottom),1rem);
+  max-width:680px;margin:0 auto;
+}
+
+.rw{padding:.5rem 0}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:2rem}
+.stat{background:var(--bg2);border-radius:var(--rmd);padding:.75rem 1rem}
+.sv{font-size:22px;font-weight:500;color:var(--tx);line-height:1.2}
+.sl{font-size:12px;color:var(--tx3);margin-top:2px}
+
+.city-row{display:flex;align-items:flex-start}
+.spine{display:flex;flex-direction:column;align-items:center;width:40px;flex-shrink:0}
+.cdot{width:14px;height:14px;border-radius:50%;border:2px solid var(--bg);flex-shrink:0;position:relative;z-index:2}
+.sline{width:2px}
+.ccard{flex:1}
+.ctitle{display:flex;align-items:baseline;gap:8px;padding:2px 0 0}
+.cname{font-size:16px;font-weight:500;color:var(--tx)}
+.cdates{font-size:12px;color:var(--tx3)}
+.chotel{font-size:12px;color:var(--tx2);margin-top:2px;padding-bottom:6px}
+
+.leg-row{display:flex;align-items:flex-start}
+.lspine{display:flex;flex-direction:column;align-items:center;width:40px;flex-shrink:0}
+.liw{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:2}
+.llt{width:2px;height:8px}.llb{width:2px;flex:1;min-height:8px}
+.linfo{flex:1;padding:2px 0 10px}
+.lmain{font-size:13px;color:var(--tx2)}
+.lsub{font-size:11px;color:var(--tx3);margin-top:1px}
+.badge{display:inline-block;font-size:10px;font-weight:500;padding:1px 6px;border-radius:3px;margin-left:5px;vertical-align:middle}
+.bp{background:#E6F1FB;color:#0C447C}
+.bt{background:#EAF3DE;color:#27500A}
+.bf{background:#E1F5EE;color:#085041}
+.bw{background:#FAEEDA;color:#633806}
+.d-kja{background:#B4B2A9}.d-bj{background:#378ADD}.d-zjj{background:#1D9E75}.d-frz{background:#97C459}.d-sh{background:#D4537E}
+.ltravel{background:var(--br2)}.lstay{background:var(--br)}
+.ip{background:#E6F1FB}.itr{background:#EAF3DE}.ifa{background:#E1F5EE}
+svg.ic{width:12px;height:12px;display:block}
+
+.local-btn{
+  display:flex;align-items:center;gap:6px;margin:4px 0 8px;
+  cursor:pointer;background:var(--bg2);
+  border:0.5px solid var(--br);border-radius:var(--rmd);
+  padding:5px 10px;font-size:11px;color:var(--tx2);
+  width:fit-content;user-select:none;
+  transition:background .15s;font-family:var(--f)
+}
+.local-btn:hover{background:var(--bg3)}
+.local-btn .arr{font-size:9px;transition:transform .2s;display:inline-block;color:var(--tx3)}
+.local-btn.open .arr{transform:rotate(90deg)}
+.local-panel{overflow:hidden;max-height:0;transition:max-height .35s ease}
+.local-panel.open{max-height:3000px}
+.local-inner{padding:4px 0 10px}
+
+.ltile{background:var(--bg);border:0.5px solid var(--br);border-radius:var(--rmd);margin-bottom:8px;overflow:hidden}
+.ltile-head{display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer}
+.ltile-main{flex:1}
+.ltile-title{font-size:12px;font-weight:500;color:var(--tx2);transition:color .15s}
+.ltile-head:hover .ltile-title{color:var(--tx)}
+.ltile-sub{font-size:11px;color:var(--tx3);margin-top:1px}
+.ltile-meta{display:flex;gap:8px;align-items:center;flex-shrink:0}
+.ltile-price{font-size:11px;color:var(--tx3)}
+.ltile-expand{
+  font-size:10px;color:var(--tx3);
+  padding:1px 6px;border:0.5px solid var(--br);
+  border-radius:3px;cursor:pointer;
+  transition:background .15s;white-space:nowrap;
+  background:transparent;font-family:var(--f)
+}
+.ltile-expand:hover{background:var(--bg2)}
+.ltile-detail{max-height:0;overflow:hidden;transition:max-height .25s ease}
+.ltile-detail.open{max-height:500px}
+.ltile-detail-inner{padding:0 10px 10px;border-top:0.5px solid var(--br)}
+.drow{display:flex;gap:6px;padding:4px 0;font-size:11px;border-bottom:0.5px solid var(--br)}
+.drow:last-child{border-bottom:none}
+.dlbl{color:var(--tx3);min-width:90px;flex-shrink:0}
+.dval{color:var(--tx2)}
+.warn-row{
+  display:flex;gap:6px;padding:5px 8px;
+  background:#fef3e2;border-radius:4px;
+  margin-top:6px;font-size:11px;color:#7a4a00
+}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:1.5rem;padding-top:1rem;border-top:0.5px solid var(--br)}
+.li{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--tx3)}
+.ld{width:8px;height:8px;border-radius:50%;display:inline-block}
+
+.sb-wrap{margin-bottom:1.5rem}
+.sb-card{background:var(--bg);border:0.5px solid var(--br);border-radius:var(--rlg);padding:14px 16px;margin-bottom:8px}
+.sb-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.sb-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:19px}
+.sb-icon-plane{background:#E6F1FB}
+.sb-icon-train{background:#EAF3DE}
+.sb-icon-hotel{background:#FBEAF0}
+@media(prefers-color-scheme:dark){
+  .sb-icon-plane{background:#0c447c}
+  .sb-icon-train{background:#27500a}
+  .sb-icon-hotel{background:#4b1528}
+}
+.sb-meta{flex:1;min-width:0}
+.sb-status-lbl{font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--tx3);margin-bottom:2px}
+.sb-title{font-size:14px;font-weight:500;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-subtitle{font-size:11px;color:var(--tx2);margin-top:2px}
+.sb-time{text-align:right;flex-shrink:0}
+.sb-countdown{font-size:20px;font-weight:500;color:var(--tx);line-height:1}
+.sb-countdown-lbl{font-size:10px;color:var(--tx3);margin-top:2px}
+.sb-prog-wrap{display:flex;align-items:center;gap:8px}
+.sb-bar-bg{flex:1;height:4px;background:var(--bg2);border-radius:2px;overflow:hidden}
+.sb-bar-fill{height:100%;border-radius:2px;transition:width .6s ease}
+.sb-bar-plane{background:#378ADD}
+.sb-bar-train{background:#1D9E75}
+.sb-bar-hotel{background:#D4537E}
+.sb-pct{font-size:11px;color:var(--tx3);min-width:32px;text-align:right}
+.sb-details{display:flex;gap:12px;margin-top:10px;padding-top:10px;border-top:0.5px solid var(--br)}
+.sb-det{flex:1;min-width:0}
+.sb-det-lbl{font-size:10px;color:var(--tx3)}
+.sb-det-val{font-size:11px;color:var(--tx2);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-next{display:flex;align-items:center;gap:10px;background:var(--bg2);border-radius:10px;padding:10px 12px}
+.sb-next-icon{width:28px;height:28px;border-radius:7px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.sb-next-meta{flex:1;min-width:0}
+.sb-next-lbl{font-size:10px;color:var(--tx3);font-weight:500;letter-spacing:.05em;text-transform:uppercase}
+.sb-next-title{font-size:12px;font-weight:500;color:var(--tx);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-next-sub{font-size:11px;color:var(--tx2);margin-top:1px}
+.sb-next-in{font-size:11px;color:var(--tx3);flex-shrink:0;text-align:right;margin-left:8px;white-space:nowrap}
+.sb-idle{background:var(--bg2);border-radius:var(--rlg);padding:12px 16px;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.sb-idle-meta{flex:1;min-width:0}
+.sb-idle-lbl{font-size:10px;color:var(--tx3);font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+.sb-idle-title{font-size:13px;font-weight:500;color:var(--tx);margin-top:2px}
+.sb-idle-sub{font-size:11px;color:var(--tx2);margin-top:1px}
+.sb-idle-in{font-size:12px;color:var(--tx3);flex-shrink:0;text-align:right;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="pl-icon">
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+      <circle cx="20" cy="13" r="5.5" fill="white" opacity="0.95"/>
+      <path d="M5 34C5 24 11 18 20 18C29 18 35 24 35 34" stroke="white" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <line x1="3" y1="29" x2="8" y2="24" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
+      <line x1="37" y1="29" x2="32" y2="24" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
+    </svg>
+  </div>
+  <div class="pl-label">загружаем маршрут</div>
+  <div class="pl-dots">
+    <div class="pl-dot"></div>
+    <div class="pl-dot"></div>
+    <div class="pl-dot"></div>
+  </div>
+</div>
+
+<div class="rw">
+<div id="sb-wrap" class="sb-wrap"></div>
+
+<div class="stats">
+  <div class="stat"><div class="sv">17</div><div class="sl">дней</div></div>
+  <div class="stat"><div class="sv">4</div><div class="sl">города</div></div>
+  <div class="stat"><div class="sv">6</div><div class="sl">перелётов</div></div>
+  <div class="stat"><div class="sv">3</div><div class="sl">поезда</div></div>
+</div>
+
+<div class="timeline">
+
+  <div class="city-row">
+    <div class="spine"><div class="cdot d-kja"></div><div class="sline ltravel" style="height:48px"></div></div>
+    <div class="ccard"><div class="ctitle"><span class="cname">Красноярск</span><span class="cdates">18 апреля</span></div><div class="chotel" style="padding-bottom:10px">Вылет · KJA</div></div>
+  </div>
+
+  <div class="leg-row">
+    <div class="lspine"><div class="llt ltravel"></div><div class="liw ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg></div><div class="llb ltravel"></div></div>
+    <div class="linfo"><div class="lmain">S7 6432 → Иркутск<span class="badge bp">✈ 1ч 40м</span></div><div class="lsub">21:05 → 23:45 · пересадка</div></div>
+  </div>
+  <div class="leg-row">
+    <div class="lspine"><div class="llt ltravel"></div><div class="liw ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg></div><div class="llb ltravel"></div></div>
+    <div class="linfo"><div class="lmain">S7 6311 → Пекин Дасин<span class="badge bp">✈ 2ч 55м</span></div><div class="lsub">01:40 → 04:35 · 19 апреля</div></div>
+  </div>
+
+  <div class="city-row">
+    <div class="spine"><div class="cdot d-bj"></div><div class="sline lstay" style="height:10px"></div></div>
+    <div class="ccard">
+      <div class="ctitle"><span class="cname">Пекин</span><span class="cdates">19–22 апреля · 4 ночи</span></div>
+      <div class="chotel">Jialong Hotel · Chaoyangmen · Dongcheng</div>
+      <button class="local-btn" onclick="toggleLocal(this)"><span class="arr">▶</span> локальные перемещения</button>
+      <div class="local-panel"><div class="local-inner">
+        <div class="ltile">
+          <div class="ltile-head"><div class="ltile-icon ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg></div><div class="ltile-main"><div class="ltile-title">PKX → Jialong Hotel</div><div class="ltile-sub">такси · 19 апр 04:35 · ~50–70 мин</div></div><div class="ltile-meta"><span class="ltile-price">~120–160 ¥</span><button class="ltile-expand" onclick="toggleDetail(this)">подробнее</button></div></div>
+          <div class="ltile-detail"><div class="ltile-detail-inner">
+            <div class="drow"><span class="dlbl">Откуда POI</span><span class="dval">北京大兴国际机场</span></div>
+            <div class="drow"><span class="dlbl">Куда POI</span><span class="dval">Jialong Hotel Block B</span></div>
+            <div class="drow"><span class="dlbl">Метро</span><span class="dval">~35–50 ¥ · ~60–80 мин · не работает в 04:35</span></div>
+            <div class="drow"><span class="dlbl">Ориентир</span><span class="dval">район Chaoyangmen, рядом с Chaonei Street</span></div>
+            <div class="warn-row">⚠ Ночное прибытие — метро закрыто до ~06:00. Только такси или DiDi. Бронь с 18 апр — номер ждёт, заехать сразу.</div>
+          </div></div>
+        </div>
+        <div class="ltile">
+          <div class="ltile-head"><div class="ltile-icon itr"><svg class="ic" viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="10" rx="2" stroke="#3B6D11" stroke-width="1.2" fill="none"/><rect x="5" y="4" width="2.5" height="3" rx="0.5" fill="#3B6D11"/><rect x="8.5" y="4" width="2.5" height="3" rx="0.5" fill="#3B6D11"/><line x1="5" y1="9" x2="11" y2="9" stroke="#3B6D11" stroke-width="1"/><line x1="4" y1="12" x2="6.5" y2="12" stroke="#3B6D11" stroke-width="1.2" stroke-linecap="round"/><line x1="9.5" y1="12" x2="12" y2="12" stroke="#3B6D11" stroke-width="1.2" stroke-linecap="round"/></svg></div><div class="ltile-main"><div class="ltile-title">Jialong Hotel → Beijing West</div><div class="ltile-sub">метро / такси · 22 апр · выехать до 09:45</div></div><div class="ltile-meta"><span class="ltile-price">~6–60 ¥</span><button class="ltile-expand" onclick="toggleDetail(this)">подробнее</button></div></div>
+          <div class="ltile-detail"><div class="ltile-detail-inner">
+            <div class="drow"><span class="dlbl">Откуда POI</span><span class="dval">Jialong Hotel Block B</span></div>
+            <div class="drow"><span class="dlbl">Куда POI</span><span class="dval">北京西站</span></div>
+            <div class="drow"><span class="dlbl">Метро</span><span class="dval">~6–8 ¥ · ~25–35 мин</span></div>
+            <div class="drow"><span class="dlbl">Такси</span><span class="dval">~40–60 ¥ · ~20–40 мин</span></div>
+            <div class="warn-row">⚠ Поезд 11:14 — прийти за 60 мин. 20–30 мин на ориентирование внутри вокзала. Проверить статус билета («частичный возврат»).</div>
+          </div></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="leg-row">
+    <div class="lspine"><div class="llt lstay"></div><div class="liw itr"><svg class="ic" viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="10" rx="2" stroke="#3B6D11" stroke-width="1.2" fill="none"/><rect x="5" y="4" width="2.5" height="3" rx="0.5" fill="#3B6D11"/><rect x="8.5" y="4" width="2.5" height="3" rx="0.5" fill="#3B6D11"/><line x1="5" y1="9" x2="11" y2="9" stroke="#3B6D11" stroke-width="1"/><line x1="4" y1="12" x2="6.5" y2="12" stroke="#3B6D11" stroke-width="1.2" stroke-linecap="round"/><line x1="9.5" y1="12" x2="12" y2="12" stroke="#3B6D11" stroke-width="1.2" stroke-linecap="round"/></svg></div><div class="llb ltravel"></div></div>
+    <div class="linfo"><div class="lmain">Пекин-Западный → Чжанцзядзе-Западный<span class="badge bt">18ч 06м</span><span class="badge bw">⚠ возврат</span></div><div class="lsub">22 апр 11:14 → 23 апр 05:20</div></div>
+  </div>
+
+  <div class="city-row">
+    <div class="spine"><div class="cdot d-zjj"></div><div class="sline lstay" style="height:10px"></div></div>
+    <div class="ccard">
+      <div class="ctitle"><span class="cname">Чжанцзядзе</span><span class="cdates">23–27 апреля · 5 ночей</span></div>
+      <div class="chotel">Qiquan Homestay · Wulingyuan · National Forest Park</div>
+      <button class="local-btn" onclick="toggleLocal(this)"><span class="arr">▶</span> локальные перемещения</button>
+      <div class="local-panel"><div class="local-inner">
+        <div class="ltile">
+          <div class="ltile-head"><div class="ltile-icon ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg></div><div class="ltile-main"><div class="ltile-title">Zhangjiajie West → Qiquan Homestay</div><div class="ltile-sub">такси · 23 апр 05:20 · ~30–50 мин</div></div><div class="ltile-meta"><span class="ltile-price">~50–80 ¥</span><button class="ltile-expand" onclick="toggleDetail(this)">подробнее</button></div></div>
+          <div class="ltile-detail"><div class="ltile-detail-inner">
+            <div class="drow"><span class="dlbl">Откуда POI</span><span class="dval">张家界西站</span></div>
+            <div class="drow"><span class="dlbl">Куда POI</span><span class="dval">Qiquan Minsu (Zhangjiajie National Forest Park Shop)</span></div>
+            <div class="drow"><span class="dlbl">Ориентир</span><span class="dval">дер. Xinwu, у въезда в Wulingyuan</span></div>
+            <div class="warn-row">⚠ Раннее утро — такси мало. Бронь с 22 апр — номер оплачен, заехать сразу. Заказать трансфер у отеля заранее.</div>
+          </div></div>
+        </div>
+        <div class="ltile">
+          <div class="ltile-head"><div class="ltile-icon ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg></div><div class="ltile-main"><div class="ltile-title">Qiquan Homestay → Zhangjiajie West</div><div class="ltile-sub">такси · 27 апр · выехать до 11:45</div></div><div class="ltile-meta"><span class="ltile-price">~50–80 ¥</span><button class="ltile-expand" onclick="toggleDetail(this)">подробнее</button></div></div>
+          <div class="ltile-detail"><div class="ltile-detail-inner">
+            <div class="drow"><span class="dlbl">Откуда POI</span><span class="dval">Qiquan Minsu (Zhangjiajie National Forest Park Shop)</span></div>
+            <div class="drow"><span class="dlbl">Куда POI</span><span class="dval">张家界西站</span></div>
+            <div class="drow"><span class="dlbl">Время в пути</span><span class="dval">~30–50 мин</span></div>
+            <div class="warn-row">⚠ Поезд 12:47 — плотный день. Заказать такси заранее. Выезд из отеля до 14:00 — уехать раньше.</div>
+          </div></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="leg-row">
+    <div class="lspine"><div class="llt lstay"></div><div class="liw ifa"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M1 9l4-6h6l4 6H1z" stroke="#085041" stroke-width="1.2" fill="none" stroke-linejoin="round"/><line x1="8" y1="3" x2="8" y2="9" stroke="#085041" stroke-width="1"/><line x1="1" y1="11" x2="15" y2="11" stroke="#085041" stroke-width="1.2"/><line x1="3" y1="13" x2="5" y2="13" stroke="#085041" stroke-width="1.2" stroke-linecap="round"/><line x1="11" y1="13" x2="13" y2="13" stroke="#085041" stroke-width="1.2" stroke-linecap="round"/></svg></div><div class="llb ltravel"></div></div>
+    <div class="linfo"><div class="lmain">Чжанцзядзе-Зап. → Фужунчжэнь<span class="badge bf">⚡ 23 мин</span></div><div class="lsub">27 апр · 12:47 → 13:10</div></div>
+  </div>
+
+  <div class="city-row">
+    <div class="spine"><div class="cdot d-frz"></div><div class="sline lstay" style="height:10px"></div></div>
+    <div class="ccard">
+      <div class="ctitle"><span class="cname">Фужунчжэнь</span><span class="cdates">27–28 апреля · 1 ночь</span></div>
+      <div class="chotel">Xuanyuan Viewing Courtyard B&amp;B · Furong Town Scenic Area</div>
+      <button class="local-btn" onclick="toggleLocal(this)"><span class="arr">▶</span> локальные перемещения</button>
+      <div class="local-panel"><div class="local-inner">
+        <div class="ltile">
+          <div class="ltile-head"><div class="ltile-icon ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M8 2C5.8 2 4 3.8 4 6c0 3 4 8 4 8s4-5 4-8c0-2.2-1.8-4-4-4zm0 5.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" fill="#378ADD"/></svg></div><div class="ltile-main"><div class="ltile-title">Furongzhen Station → Xuanyuan B&amp;B</div><div class="ltile-sub">пешком / такси · 27 апр 13:10 · ~5–20 мин</div></div><div class="ltile-meta"><span class="ltile-price">0–25 ¥</span><button class="ltile-expand" onclick="toggleDetail(this)">подробнее</button></div></div>
+          <div class="ltile-detail"><div class="ltile-detail-inner">
+            <div class="drow"><span class="dlbl">Откуда POI</span><span class="dval">芙蓉镇站</span></div>
+            <div class="drow"><span class="dlbl">Куда POI</span><span class="dval">XuanyuanViewingCourtyardB</span></div>
+            <div class="drow"><span class="dlbl">Ориентир</span><span class="dval">у входа в scenic area, рядом с рекой, Tingtao Road West</span></div>
+            <div class="warn-row">⚠ Прибытие ~13:15–13:30, заселение после 14:00 — ожидание ~30–45 мин. Уточнить хранение вещей.</div>
+          </div></div>
+        </div>
+        <div class="ltile">
+          <div class="ltile-head"><div class="ltile-icon ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M8 2C5.8 2 4 3.8 4 6c0 3 4 8 4 8s4-5 4-8c0-2.2-1.8-4-4-4zm0 5.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" fill="#378ADD"/></svg></div><div class="ltile-main"><div class="ltile-title">Xuanyuan B&amp;B → Furongzhen Station</div><div class="ltile-sub">пешком / такси · 28 апр · выехать до 11:30</div></div><div class="ltile-meta"><span class="ltile-price">0–25 ¥</span><button class="ltile-expand" onclick="toggleDetail(this)">подробнее</button></div></div>
+          <div class="ltile-detail"><div class="ltile-detail-inner">
+            <div class="drow"><span class="dlbl">Откуда POI</span><span class="dval">XuanyuanViewingCourtyardB</span></div>
+            <div class="drow"><span class="dlbl">Куда POI</span><span class="dval">芙蓉镇站</span></div>
+            <div class="drow"><span class="dlbl">Время в пути</span><span class="dval">~5–15 мин · поезд 12:05</span></div>
+          </div></div>
+        </div>
+        <div class="ltile">
+          <div class="ltile-head"><div class="ltile-icon ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg></div><div class="ltile-main"><div class="ltile-title">Zhangjiajie West → DYG Airport</div><div class="ltile-sub">такси · 28 апр · выехать до 14:45</div></div><div class="ltile-meta"><span class="ltile-price">~60–100 ¥</span><button class="ltile-expand" onclick="toggleDetail(this)">подробнее</button></div></div>
+          <div class="ltile-detail"><div class="ltile-detail-inner">
+            <div class="drow"><span class="dlbl">Откуда POI</span><span class="dval">张家界西站</span></div>
+            <div class="drow"><span class="dlbl">Куда POI</span><span class="dval">张家界荷花国际机场</span></div>
+            <div class="drow"><span class="dlbl">Время в пути</span><span class="dval">~30–45 мин · аэропорт к северо-востоку</span></div>
+            <div class="warn-row">⚠ Вокзал и аэропорт — разные точки, не перепутать. Вылет 16:25, буфер ~4 часа.</div>
+          </div></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="leg-row">
+    <div class="lspine"><div class="llt lstay"></div><div class="liw ifa"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M1 9l4-6h6l4 6H1z" stroke="#085041" stroke-width="1.2" fill="none" stroke-linejoin="round"/><line x1="8" y1="3" x2="8" y2="9" stroke="#085041" stroke-width="1"/><line x1="1" y1="11" x2="15" y2="11" stroke="#085041" stroke-width="1.2"/><line x1="3" y1="13" x2="5" y2="13" stroke="#085041" stroke-width="1.2" stroke-linecap="round"/><line x1="11" y1="13" x2="13" y2="13" stroke="#085041" stroke-width="1.2" stroke-linecap="round"/></svg></div><div class="llb ltravel"></div></div>
+    <div class="linfo"><div class="lmain">Фужунчжэнь → Чжанцзядзе-Зап.<span class="badge bf">⚡ 23 мин</span></div><div class="lsub">28 апр · 12:05 → 12:28 · затем такси до DYG</div></div>
+  </div>
+  <div class="leg-row">
+    <div class="lspine"><div class="llt ltravel"></div><div class="liw ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg></div><div class="llb ltravel"></div></div>
+    <div class="linfo"><div class="lmain">HO1222 · DYG → Шанхай Пудун<span class="badge bp">✈ 2ч 05м</span></div><div class="lsub">28 апр · 16:25 → 18:30</div></div>
+  </div>
+
+  <div class="city-row">
+    <div class="spine"><div class="cdot d-sh"></div><div class="sline lstay" style="height:10px"></div></div>
+    <div class="ccard">
+      <div class="ctitle"><span class="cname">Шанхай</span><span class="cdates">28 апр – 2 мая · 4 ночи</span></div>
+      <div class="chotel">Heyitang Hotel · Huinan Town · Pudong</div>
+      <button class="local-btn" onclick="toggleLocal(this)"><span class="arr">▶</span> локальные перемещения</button>
+      <div class="local-panel"><div class="local-inner">
+        <div class="ltile">
+          <div class="ltile-head"><div class="ltile-icon itr"><svg class="ic" viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="10" rx="2" stroke="#3B6D11" stroke-width="1.2" fill="none"/><rect x="5" y="4" width="2.5" height="3" rx="0.5" fill="#3B6D11"/><rect x="8.5" y="4" width="2.5" height="3" rx="0.5" fill="#3B6D11"/><line x1="5" y1="9" x2="11" y2="9" stroke="#3B6D11" stroke-width="1"/><line x1="4" y1="12" x2="6.5" y2="12" stroke="#3B6D11" stroke-width="1.2" stroke-linecap="round"/><line x1="9.5" y1="12" x2="12" y2="12" stroke="#3B6D11" stroke-width="1.2" stroke-linecap="round"/></svg></div><div class="ltile-main"><div class="ltile-title">PVG → Heyitang Hotel</div><div class="ltile-sub">метро Line 16 / такси · 28 апр 18:30 · ~50–70 мин</div></div><div class="ltile-meta"><span class="ltile-price">~10–160 ¥</span><button class="ltile-expand" onclick="toggleDetail(this)">подробнее</button></div></div>
+          <div class="ltile-detail"><div class="ltile-detail-inner">
+            <div class="drow"><span class="dlbl">Откуда POI</span><span class="dval">上海浦东国际机场</span></div>
+            <div class="drow"><span class="dlbl">Куда POI</span><span class="dval">Heyitang Hotel (Gongji Road Branch)</span></div>
+            <div class="drow"><span class="dlbl">Метро</span><span class="dval">~10–15 ¥ · PVG → пересадка → Line 16 → Huinan</span></div>
+            <div class="drow"><span class="dlbl">Ориентир</span><span class="dval">ст. Huinan, выход 2, ~210 м пешком</span></div>
+            <div class="warn-row">⚠ Maglev не нужен — идёт до Longyang Road, далеко от Huinan. Проверить маршрут в Amap.</div>
+          </div></div>
+        </div>
+        <div class="ltile">
+          <div class="ltile-head"><div class="ltile-icon itr"><svg class="ic" viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="10" rx="2" stroke="#3B6D11" stroke-width="1.2" fill="none"/><rect x="5" y="4" width="2.5" height="3" rx="0.5" fill="#3B6D11"/><rect x="8.5" y="4" width="2.5" height="3" rx="0.5" fill="#3B6D11"/><line x1="5" y1="9" x2="11" y2="9" stroke="#3B6D11" stroke-width="1"/><line x1="4" y1="12" x2="6.5" y2="12" stroke="#3B6D11" stroke-width="1.2" stroke-linecap="round"/><line x1="9.5" y1="12" x2="12" y2="12" stroke="#3B6D11" stroke-width="1.2" stroke-linecap="round"/></svg></div><div class="ltile-main"><div class="ltile-title">Heyitang Hotel → SHA Hongqiao</div><div class="ltile-sub">метро / такси · 2 мая · выехать до 12:30</div></div><div class="ltile-meta"><span class="ltile-price">~10–160 ¥</span><button class="ltile-expand" onclick="toggleDetail(this)">подробнее</button></div></div>
+          <div class="ltile-detail"><div class="ltile-detail-inner">
+            <div class="drow"><span class="dlbl">Откуда POI</span><span class="dval">Heyitang Hotel (Gongji Road Branch)</span></div>
+            <div class="drow"><span class="dlbl">Куда POI</span><span class="dval">上海虹桥国际机场T2</span></div>
+            <div class="drow"><span class="dlbl">Метро</span><span class="dval">~10–15 ¥ · ~70–90 мин · несколько пересадок</span></div>
+            <div class="drow"><span class="dlbl">Такси</span><span class="dval">~120–160 ¥ · ~60–80 мин</span></div>
+            <div class="warn-row">⚠ Hongqiao и Pudong — противоположные концы города. Минимум 2 часа. Выезд до 12:00 по брони — удобно совпадает.</div>
+          </div></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="leg-row">
+    <div class="lspine"><div class="llt lstay"></div><div class="liw ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg></div><div class="llb ltravel"></div></div>
+    <div class="linfo"><div class="lmain">CZ8880 · SHA Hongqiao → Пекин Дасин<span class="badge bp">✈ 2ч 10м</span></div><div class="lsub">2 мая · 15:30 → 17:40</div></div>
+  </div>
+
+  <div class="city-row">
+    <div class="spine"><div class="cdot d-bj"></div><div class="sline lstay" style="height:10px"></div></div>
+    <div class="ccard">
+      <div class="ctitle"><span class="cname">Пекин</span><span class="cdates">2–4 мая · 2 ночи</span></div>
+      <div class="chotel">James Joyce Coffetel · Дасин · рядом с PKX</div>
+      <button class="local-btn" onclick="toggleLocal(this)"><span class="arr">▶</span> локальные перемещения</button>
+      <div class="local-panel"><div class="local-inner">
+        <div class="ltile">
+          <div class="ltile-head"><div class="ltile-icon ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg></div><div class="ltile-main"><div class="ltile-title">PKX → James Joyce Coffetel</div><div class="ltile-sub">такси · 2 мая 17:40 · ~20–35 мин</div></div><div class="ltile-meta"><span class="ltile-price">~30–50 ¥</span><button class="ltile-expand" onclick="toggleDetail(this)">подробнее</button></div></div>
+          <div class="ltile-detail"><div class="ltile-detail-inner">
+            <div class="drow"><span class="dlbl">Откуда POI</span><span class="dval">北京大兴国际机场</span></div>
+            <div class="drow"><span class="dlbl">Куда POI</span><span class="dval">James Joyce Coffetel (Beijing Daxing International Airport Er Shop)</span></div>
+            <div class="drow"><span class="dlbl">Ориентир</span><span class="dval">Longfeng Street, Daxing — рядом с аэропортом</span></div>
+          </div></div>
+        </div>
+        <div class="ltile">
+          <div class="ltile-head"><div class="ltile-icon ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg></div><div class="ltile-main"><div class="ltile-title">James Joyce Coffetel → PKX</div><div class="ltile-sub">такси · 4 мая · выехать ~03:30</div></div><div class="ltile-meta"><span class="ltile-price">~30–50 ¥</span><button class="ltile-expand" onclick="toggleDetail(this)">подробнее</button></div></div>
+          <div class="ltile-detail"><div class="ltile-detail-inner">
+            <div class="drow"><span class="dlbl">Откуда POI</span><span class="dval">James Joyce Coffetel (Beijing Daxing International Airport Er Shop)</span></div>
+            <div class="drow"><span class="dlbl">Куда POI</span><span class="dval">北京大兴国际机场</span></div>
+            <div class="drow"><span class="dlbl">Время в пути</span><span class="dval">~10–20 мин</span></div>
+            <div class="warn-row">⚠ Вылет 05:35 — выезд ~03:30. Быть в аэропорту до 04:30. Заказать такси заранее через DiDi или отель.</div>
+          </div></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="leg-row">
+    <div class="lspine"><div class="llt lstay"></div><div class="liw ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg></div><div class="llb ltravel"></div></div>
+    <div class="linfo"><div class="lmain">S7 6312 · PKX → Иркутск<span class="badge bp">✈ 3ч 10м</span><span class="badge bw">⚠ 05:35</span></div><div class="lsub">4 мая · выезд ~03:30</div></div>
+  </div>
+  <div class="leg-row">
+    <div class="lspine"><div class="llt ltravel"></div><div class="liw ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg></div><div class="llb ltravel" style="min-height:4px"></div></div>
+    <div class="linfo"><div class="lmain">S7 6431 · Иркутск → Красноярск<span class="badge bp">✈ 1ч 40м</span></div><div class="lsub">4 мая · 19:50 → 20:30</div></div>
+  </div>
+
+  <div class="city-row">
+    <div class="spine"><div class="cdot d-kja"></div></div>
+    <div class="ccard"><div class="ctitle"><span class="cname">Красноярск</span><span class="cdates">4 мая</span></div><div class="chotel" style="padding-bottom:16px">Домой</div></div>
+  </div>
+
+</div>
+
+<div class="legend">
+  <span class="li"><span class="ld" style="background:#378ADD"></span>Пекин</span>
+  <span class="li"><span class="ld" style="background:#1D9E75"></span>Чжанцзядзе</span>
+  <span class="li"><span class="ld" style="background:#97C459"></span>Фужунчжэнь</span>
+  <span class="li"><span class="ld" style="background:#D4537E"></span>Шанхай</span>
+  <span class="li"><span class="ld" style="background:#B4B2A9"></span>Красноярск / Иркутск</span>
+  <span class="li"><span class="badge bw" style="margin:0">⚠</span>внимание</span>
+</div>
+</div>
+
+<script>
+function toggleLocal(btn){
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+function toggleDetail(btn){
+  const d=btn.closest('.ltile').querySelector('.ltile-detail');
+  btn.textContent=d.classList.toggle('open')?'свернуть':'подробнее';
+}
+
+const ICON_SVG=`<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#1D9E75"/><circle cx="256" cy="170" r="62" fill="white" opacity="0.95"/><path d="M80 408C80 300 158 236 256 236C354 236 432 300 432 408" stroke="white" stroke-width="40" stroke-linecap="round" fill="none"/><line x1="56" y1="348" x2="108" y2="296" stroke="white" stroke-width="22" stroke-linecap="round" opacity="0.4"/><line x1="456" y1="348" x2="404" y2="296" stroke="white" stroke-width="22" stroke-linecap="round" opacity="0.4"/></svg>`;
+
+const ICON_URL='data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(ICON_SVG)));
+document.getElementById('apple-icon').href=ICON_URL;
+
+const MANIFEST={
+  name:'Китай 2026',
+  short_name:'Китай 2026',
+  description:'Маршрут поездки в Китай — апрель–май 2026',
+  start_url:'.',
+  display:'standalone',
+  background_color:'#1D9E75',
+  theme_color:'#1D9E75',
+  icons:[{src:ICON_URL,sizes:'512x512',type:'image/svg+xml',purpose:'any maskable'}]
+};
+try{
+  const mb=new Blob([JSON.stringify(MANIFEST)],{type:'application/json'});
+  document.getElementById('manifest-link').href=URL.createObjectURL(mb);
+}catch(e){}
+
+const SW_CODE=`
+const CACHE='china-2026-v1';
+self.addEventListener('install',e=>{
+  e.waitUntil(
+    caches.open(CACHE).then(c=>c.add('/')).then(()=>self.skipWaiting())
+  );
+});
+self.addEventListener('activate',e=>{
+  e.waitUntil(
+    caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k))))
+    .then(()=>self.clients.claim())
+  );
+});
+self.addEventListener('fetch',e=>{
+  e.respondWith(
+    caches.match(e.request).then(cached=>{
+      const fresh=fetch(e.request).then(r=>{
+        if(r&&r.status===200){
+          const cl=r.clone();
+          caches.open(CACHE).then(c=>c.put(e.request,cl));
+        }
+        return r;
+      }).catch(()=>cached);
+      return cached||fresh;
+    })
+  );
+});
+`;
+if('serviceWorker' in navigator){
+  try{
+    const swb=new Blob([SW_CODE],{type:'application/javascript'});
+    const swu=URL.createObjectURL(swb);
+    navigator.serviceWorker.register(swu).catch(()=>{});
+  }catch(e){}
+}
+
+window.addEventListener('load',()=>{
+  const pl=document.getElementById('preloader');
+  setTimeout(()=>{
+    pl.classList.add('hidden');
+    setTimeout(()=>{if(pl.parentNode)pl.parentNode.removeChild(pl);},450);
+  },700);
+});
+
+// ── STATUSBAR ────────────────────────────────────────────────
+// All times in UTC+8 (single timezone for entire route)
+const TZ_OFFSET = 8 * 60; // minutes
+
+function nowUTC8() {
+  const now = new Date();
+  const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+  return new Date(utc + TZ_OFFSET * 60000);
+}
+
+function dt(y,mo,d,h,mi){ return new Date(Date.UTC(y,mo-1,d,h-8,mi)); }
+
+// Events: transport first (priority over hotel), then hotel
+// type: 'plane'|'train'|'hotel'
+// start/end: UTC timestamps (computed via dt())
+const EVENTS = [
+  // ── TRANSPORT ──
+  {
+    id:'s7-6432', type:'plane', priority:1,
+    icon:'✈', barClass:'sb-bar-plane', iconClass:'sb-icon-plane',
+    label:'перелёт',
+    title:'S7 6432 · Красноярск → Иркутск',
+    subtitle:'KJA → IKT',
+    start: dt(2026,4,18,21,5),
+    end:   dt(2026,4,18,23,45),
+    d:[
+      {l:'вылет',    v:'18 апр, 21:05 (KJA)'},
+      {l:'прибытие', v:'18 апр, 23:45 (IKT)'},
+      {l:'рейс',     v:'S7 6432 · Embraer 170'}
+    ]
+  },
+  {
+    id:'s7-6311', type:'plane', priority:1,
+    icon:'✈', barClass:'sb-bar-plane', iconClass:'sb-icon-plane',
+    label:'перелёт',
+    title:'S7 6311 · Иркутск → Пекин',
+    subtitle:'IKT → PKX (Beijing Daxing)',
+    start: dt(2026,4,19,1,40),
+    end:   dt(2026,4,19,4,35),
+    d:[
+      {l:'вылет',    v:'19 апр, 01:40 (IKT)'},
+      {l:'прибытие', v:'19 апр, 04:35 (PKX)'},
+      {l:'рейс',     v:'S7 6311 · Boeing 737-800'}
+    ]
+  },
+  {
+    id:'train-bj-zjj', type:'train', priority:1,
+    icon:'🚆', barClass:'sb-bar-train', iconClass:'sb-icon-train',
+    label:'поезд',
+    title:'Пекин → Чжанцзядзе',
+    subtitle:'Beijing West → Zhangjiajie West',
+    start: dt(2026,4,22,11,14),
+    end:   dt(2026,4,23,5,20),
+    d:[
+      {l:'отправление', v:'22 апр, 11:14 (北京西站)'},
+      {l:'прибытие',    v:'23 апр, 05:20 (张家界西站)'},
+      {l:'длительность',v:'18ч 06м'}
+    ]
+  },
+  {
+    id:'train-zjj-frz', type:'train', priority:1,
+    icon:'🚆', barClass:'sb-bar-train', iconClass:'sb-icon-train',
+    label:'скоростной поезд',
+    title:'Чжанцзядзе → Фужунчжэнь',
+    subtitle:'Zhangjiajie West → Furongzhen',
+    start: dt(2026,4,27,12,47),
+    end:   dt(2026,4,27,13,10),
+    d:[
+      {l:'отправление', v:'27 апр, 12:47'},
+      {l:'прибытие',    v:'27 апр, 13:10'},
+      {l:'длительность',v:'23 мин'}
+    ]
+  },
+  {
+    id:'train-frz-zjj', type:'train', priority:1,
+    icon:'🚆', barClass:'sb-bar-train', iconClass:'sb-icon-train',
+    label:'скоростной поезд',
+    title:'Фужунчжэнь → Чжанцзядзе',
+    subtitle:'Furongzhen → Zhangjiajie West',
+    start: dt(2026,4,28,12,5),
+    end:   dt(2026,4,28,12,28),
+    d:[
+      {l:'отправление', v:'28 апр, 12:05'},
+      {l:'прибытие',    v:'28 апр, 12:28'},
+      {l:'длительность',v:'23 мин'}
+    ]
+  },
+  {
+    id:'ho1222', type:'plane', priority:1,
+    icon:'✈', barClass:'sb-bar-plane', iconClass:'sb-icon-plane',
+    label:'перелёт',
+    title:'HO1222 · Чжанцзядзе → Шанхай',
+    subtitle:'DYG → PVG (Shanghai Pudong)',
+    start: dt(2026,4,28,16,25),
+    end:   dt(2026,4,28,18,30),
+    d:[
+      {l:'вылет',    v:'28 апр, 16:25 (DYG)'},
+      {l:'прибытие', v:'28 апр, 18:30 (PVG)'},
+      {l:'рейс',     v:'HO1222'}
+    ]
+  },
+  {
+    id:'cz8880', type:'plane', priority:1,
+    icon:'✈', barClass:'sb-bar-plane', iconClass:'sb-icon-plane',
+    label:'перелёт',
+    title:'CZ8880 · Шанхай → Пекин',
+    subtitle:'SHA Hongqiao → PKX (Beijing Daxing)',
+    start: dt(2026,5,2,15,30),
+    end:   dt(2026,5,2,17,40),
+    d:[
+      {l:'вылет',    v:'2 мая, 15:30 (SHA)'},
+      {l:'прибытие', v:'2 мая, 17:40 (PKX)'},
+      {l:'рейс',     v:'CZ8880'}
+    ]
+  },
+  {
+    id:'s7-6312', type:'plane', priority:1,
+    icon:'✈', barClass:'sb-bar-plane', iconClass:'sb-icon-plane',
+    label:'перелёт',
+    title:'S7 6312 · Пекин → Иркутск',
+    subtitle:'PKX → IKT',
+    start: dt(2026,5,4,5,35),
+    end:   dt(2026,5,4,8,45),
+    d:[
+      {l:'вылет',    v:'4 мая, 05:35 (PKX)'},
+      {l:'прибытие', v:'4 мая, 08:45 (IKT)'},
+      {l:'рейс',     v:'S7 6312 · Boeing 737-800'}
+    ]
+  },
+  {
+    id:'s7-6431', type:'plane', priority:1,
+    icon:'✈', barClass:'sb-bar-plane', iconClass:'sb-icon-plane',
+    label:'перелёт',
+    title:'S7 6431 · Иркутск → Красноярск',
+    subtitle:'IKT → KJA',
+    start: dt(2026,5,4,19,50),
+    end:   dt(2026,5,4,21,30),
+    d:[
+      {l:'вылет',    v:'4 мая, 19:50 (IKT)'},
+      {l:'прибытие', v:'4 мая, 20:30 (KJA)'},
+      {l:'рейс',     v:'S7 6431 · Embraer 170'}
+    ]
+  },
+  // ── HOTELS (priority 0 — yield to transport) ──
+  {
+    id:'hotel-bj-1', type:'hotel', priority:0,
+    icon:'🏨', barClass:'sb-bar-hotel', iconClass:'sb-icon-hotel',
+    label:'проживание',
+    title:'Jialong Hotel · Пекин',
+    subtitle:'Chaoyangmen · Dongcheng',
+    start: dt(2026,4,19,14,0),
+    end:   dt(2026,4,22,14,0),
+    d:[
+      {l:'заезд',  v:'19 апр, после 14:00'},
+      {l:'выезд',  v:'22 апр, до 14:00'},
+      {l:'бронь',  v:'153936075973396'}
+    ]
+  },
+  {
+    id:'hotel-zjj', type:'hotel', priority:0,
+    icon:'🏨', barClass:'sb-bar-hotel', iconClass:'sb-icon-hotel',
+    label:'проживание',
+    title:'Qiquan Homestay · Чжанцзядзе',
+    subtitle:'Wulingyuan · National Forest Park',
+    start: dt(2026,4,23,13,0),
+    end:   dt(2026,4,27,14,0),
+    d:[
+      {l:'заезд',  v:'23 апр, после 13:00'},
+      {l:'выезд',  v:'27 апр, до 14:00'},
+      {l:'бронь',  v:'1539360649797487'}
+    ]
+  },
+  {
+    id:'hotel-frz', type:'hotel', priority:0,
+    icon:'🏨', barClass:'sb-bar-hotel', iconClass:'sb-icon-hotel',
+    label:'проживание',
+    title:'Xuanyuan B&B · Фужунчжэнь',
+    subtitle:'Furong Town Scenic Area',
+    start: dt(2026,4,27,14,0),
+    end:   dt(2026,4,28,14,0),
+    d:[
+      {l:'заезд',  v:'27 апр, после 14:00'},
+      {l:'выезд',  v:'28 апр, до 14:00'},
+      {l:'бронь',  v:'1539361794512009'}
+    ]
+  },
+  {
+    id:'hotel-sh', type:'hotel', priority:0,
+    icon:'🏨', barClass:'sb-bar-hotel', iconClass:'sb-icon-hotel',
+    label:'проживание',
+    title:'Heyitang Hotel · Шанхай',
+    subtitle:'Huinan Town · Pudong',
+    start: dt(2026,4,28,14,0),
+    end:   dt(2026,5,2,12,0),
+    d:[
+      {l:'заезд',  v:'28 апр, после 14:00'},
+      {l:'выезд',  v:'2 мая, до 12:00'},
+      {l:'бронь',  v:'1539361999479926'}
+    ]
+  },
+  {
+    id:'hotel-bj-2', type:'hotel', priority:0,
+    icon:'🏨', barClass:'sb-bar-hotel', iconClass:'sb-icon-hotel',
+    label:'проживание',
+    title:'James Joyce Coffetel · Пекин',
+    subtitle:'Дасин · рядом с аэропортом PKX',
+    start: dt(2026,5,2,14,0),
+    end:   dt(2026,5,4,14,0),
+    d:[
+      {l:'заезд',  v:'2 мая, после 14:00'},
+      {l:'выезд',  v:'4 мая, до 14:00'},
+      {l:'бронь',  v:'1539363458646333'}
+    ]
+  }
+];
+
+function fmtCountdown(ms){
+  if(ms<=0) return '0м';
+  const tot=Math.floor(ms/60000);
+  const d=Math.floor(tot/1440);
+  const h=Math.floor((tot%1440)/60);
+  const m=tot%60;
+  if(d>0) return h>0?`${d}д ${h}ч`:`${d}д`;
+  if(h>0) return m>0?`${h}ч ${m}м`:`${h}ч`;
+  return `${m}м`;
+}
+
+function fmtIn(ms){
+  if(ms<=0) return '';
+  const tot=Math.floor(ms/60000);
+  const d=Math.floor(tot/1440);
+  const h=Math.floor((tot%1440)/60);
+  const m=tot%60;
+  if(d>=2) return `через ${d} дня`;
+  if(d===1) return `через 1 день`;
+  if(h>0) return `через ${h}ч ${m}м`;
+  return `через ${m}м`;
+}
+
+function getSorted(){ return [...EVENTS].sort((a,b)=>a.start-b.start); }
+
+function getCurrent(now){
+  // transport takes priority over hotel
+  const active=EVENTS.filter(e=>now>=e.start&&now<e.end);
+  if(!active.length) return null;
+  const transport=active.filter(e=>e.priority===1);
+  if(transport.length) return transport[0];
+  return active[0];
+}
+
+function getNext(now,current){
+  const sorted=getSorted();
+  // find first event starting after now that is not current and not overlapping with current transport
+  for(const e of sorted){
+    if(e.start<=now) continue;
+    if(current&&e.id===current.id) continue;
+    // if there's an active transport, skip hotels that start before transport ends
+    if(current&&current.priority===1&&e.priority===0&&e.start<current.end) continue;
+    return e;
+  }
+  return null;
+}
+
+function renderSB(){
+  const now=nowUTC8();
+  const current=getCurrent(now);
+  const next=getNext(now,current);
+  const wrap=document.getElementById('sb-wrap');
+  if(!wrap) return;
+
+  const tripStart=EVENTS[0].start;
+  const tripEnd=EVENTS[EVENTS.length-1].end;
+
+  // Before trip
+  if(now<tripStart){
+    const n=next||EVENTS[0];
+    wrap.innerHTML=`<div class="sb-idle">
+      <div class="sb-next-icon">✈</div>
+      <div class="sb-idle-meta">
+        <div class="sb-idle-lbl">до поездки · следующее</div>
+        <div class="sb-idle-title">${n.title}</div>
+        <div class="sb-idle-sub">${n.subtitle} · ${n.d[0].v}</div>
+      </div>
+      <div class="sb-idle-in">${fmtIn(n.start-now)}</div>
+    </div>`;
+    return;
+  }
+
+  // After trip
+  if(now>=tripEnd){
+    wrap.innerHTML=`<div class="sb-idle" style="justify-content:center">
+      <div style="font-size:13px;color:var(--tx2)">Поездка завершена · добро пожаловать домой</div>
+    </div>`;
+    return;
+  }
+
+  let html='';
+
+  if(current){
+    const pct=Math.round((now-current.start)/(current.end-current.start)*100);
+    const remain=fmtCountdown(current.end-now);
+    const remainLbl=current.type==='hotel'?'до выезда':'до прибытия';
+    html+=`<div class="sb-card">
+      <div class="sb-top">
+        <div class="sb-icon ${current.iconClass}">${current.icon}</div>
+        <div class="sb-meta">
+          <div class="sb-status-lbl">сейчас · ${current.label}</div>
+          <div class="sb-title">${current.title}</div>
+          <div class="sb-subtitle">${current.subtitle}</div>
+        </div>
+        <div class="sb-time">
+          <div class="sb-countdown">${remain}</div>
+          <div class="sb-countdown-lbl">${remainLbl}</div>
+        </div>
+      </div>
+      <div class="sb-prog-wrap">
+        <div class="sb-bar-bg"><div class="sb-bar-fill ${current.barClass}" style="width:${pct}%"></div></div>
+        <div class="sb-pct">${pct}%</div>
+      </div>
+      <div class="sb-details">
+        ${current.d.map(d=>`<div class="sb-det"><div class="sb-det-lbl">${d.l}</div><div class="sb-det-val">${d.v}</div></div>`).join('')}
+      </div>
+    </div>`;
+  } else {
+    // Between events — show compact idle
+    if(next){
+      html+=`<div class="sb-idle">
+        <div class="sb-next-icon">${next.icon}</div>
+        <div class="sb-idle-meta">
+          <div class="sb-idle-lbl">следующее · ${next.label}</div>
+          <div class="sb-idle-title">${next.title}</div>
+          <div class="sb-idle-sub">${next.subtitle} · ${next.d[0].v}</div>
+        </div>
+        <div class="sb-idle-in">${fmtIn(next.start-now)}</div>
+      </div>`;
+    }
+    return;
+  }
+
+  if(next){
+    html+=`<div class="sb-next">
+      <div class="sb-next-icon">${next.icon}</div>
+      <div class="sb-next-meta">
+        <div class="sb-next-lbl">следующее · ${next.label}</div>
+        <div class="sb-next-title">${next.title}</div>
+        <div class="sb-next-sub">${next.subtitle} · ${next.d[0].v}</div>
+      </div>
+      <div class="sb-next-in">${fmtIn(next.start-now)}</div>
+    </div>`;
+  }
+
+  wrap.innerHTML=html;
+}
+
+renderSB();
+setInterval(renderSB,30000);
+// ── END STATUSBAR ────────────────────────────────────────────
+</script>
+</body>
+</html>
