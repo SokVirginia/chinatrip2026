@@ -385,7 +385,7 @@ function nowUTC8() {
   return new Date(utc + TZ_OFFSET * 60000);
 }
 
-function dt(y,mo,d,h,mi){ return new Date(Date.UTC(y,mo-1,d,h-8,mi)); }
+function dt(y,mo,d,h,mi){ return new Date(Date.UTC(y,mo-1,d,h,mi)); }
 
 const EVENTS = [
   {id:'s7-6432',type:'plane',priority:1,icon:'✈',barClass:'sb-bar-plane',iconClass:'sb-icon-plane',label:'перелёт',title:'S7 6432 · Красноярск → Иркутск',subtitle:'KJA → IKT',start:dt(2026,4,18,21,5),end:dt(2026,4,18,23,45),d:[{l:'вылет',v:'18 апр, 21:05 (KJA)'},{l:'прибытие',v:'18 апр, 23:45 (IKT)'},{l:'рейс',v:'S7 6432 · Embraer 170'}]},

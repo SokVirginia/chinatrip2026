@@ -13,9 +13,10 @@
     return new Date(utc + TZ_OFFSET_MIN * 60000);
   }
 
-  // Create a Date whose UTC components represent UTC+8 wall time.
+  // Store a Date in "UTC+8 wall time scale":
+  // we keep the wall-clock time in UTC fields, so rendering via getUTC* shows UTC+8 time.
   function dtUTC8(y, mo, d, h, mi) {
-    return new Date(Date.UTC(y, mo - 1, d, h - 8, mi));
+    return new Date(Date.UTC(y, mo - 1, d, h, mi));
   }
 
   function parseRuDate(dayMonthStr) {
