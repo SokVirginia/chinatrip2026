@@ -1,12 +1,12 @@
 /* Service worker for offline support and fast updates */
-const VERSION = 'v5';
+const VERSION = 'v6';
 const STATIC_CACHE = `chinatrip-static-${VERSION}`;
 
-// App shell (timeline is now SSG — no src/timeline.js or src/main.js needed)
 const PRECACHE_URLS = [
   './',
   './index.html',
   './sw.js',
+  './src/styles.css',
   './src/ui.js',
   './src/statusbar.js',
   './src/pwa.js'
