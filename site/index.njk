@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Китай 2026</title>
+<meta name="description" content="Маршрут поездки в Китай — апрель–май 2026">
+<meta name="theme-color" content="#1a1a18" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Китай 2026">
+<link rel="apple-touch-icon" href="#" id="apple-icon">
+<link rel="manifest" id="manifest-link">
+<style>
+{{ css | safe }}
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="pl-icon">
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+      <circle cx="20" cy="13" r="5.5" fill="white" opacity="0.95"/>
+      <path d="M5 34C5 24 11 18 20 18C29 18 35 24 35 34" stroke="white" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <line x1="3" y1="29" x2="8" y2="24" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
+      <line x1="37" y1="29" x2="32" y2="24" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
+    </svg>
+  </div>
+  <div class="pl-label">загружаем маршрут</div>
+  <div class="pl-dots">
+    <div class="pl-dot"></div>
+    <div class="pl-dot"></div>
+    <div class="pl-dot"></div>
+  </div>
+</div>
+
+<div class="rw">
+<div id="sb-wrap" class="sb-wrap"></div>
+
+<div class="stats">
+  <div class="stat"><div class="sv">17</div><div class="sl">дней</div></div>
+  <div class="stat"><div class="sv">4</div><div class="sl">города</div></div>
+  <div class="stat"><div class="sv">6</div><div class="sl">перелётов</div></div>
+  <div class="stat"><div class="sv">3</div><div class="sl">поезда</div></div>
+</div>
+
+<div class="timeline">
+  {{ timeline.html | safe }}
+</div>
+
+<div class="legend">
+  <span class="li"><span class="ld" style="background:#378ADD"></span>Пекин</span>
+  <span class="li"><span class="ld" style="background:#1D9E75"></span>Чжанцзядзе</span>
+  <span class="li"><span class="ld" style="background:#97C459"></span>Фужунчжэнь</span>
+  <span class="li"><span class="ld" style="background:#D4537E"></span>Шанхай</span>
+  <span class="li"><span class="ld" style="background:#B4B2A9"></span>Красноярск / Иркутск</span>
+  <span class="li"><span class="badge bw" style="margin:0">⚠</span>внимание</span>
+</div>
+</div>
+
+<script src="./src/ui.js"></script>
+<script src="./src/pwa.js"></script>
+<script>
+// Keep existing manifest/icon generation in the output.
+const ICON_SVG=`<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#1D9E75"/><circle cx="256" cy="170" r="62" fill="white" opacity="0.95"/><path d="M80 408C80 300 158 236 256 236C354 236 432 300 432 408" stroke="white" stroke-width="40" stroke-linecap="round" fill="none"/><line x1="56" y1="348" x2="108" y2="296" stroke="white" stroke-width="22" stroke-linecap="round" opacity="0.4"/><line x1="456" y1="348" x2="404" y2="296" stroke="white" stroke-width="22" stroke-linecap="round" opacity="0.4"/></svg>`;
+const ICON_URL='data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(ICON_SVG)));
+document.getElementById('apple-icon').href=ICON_URL;
+const MANIFEST={
+  name:'Китай 2026',
+  short_name:'Китай 2026',
+  description:'Маршрут поездки в Китай — апрель–май 2026',
+  start_url:'.',
+  display:'standalone',
+  background_color:'#1D9E75',
+  theme_color:'#1D9E75',
+  icons:[{src:ICON_URL,sizes:'512x512',type:'image/svg+xml',purpose:'any maskable'}]
+};
+try{
+  const mb=new Blob([JSON.stringify(MANIFEST)],{type:'application/json'});
+  document.getElementById('manifest-link').href=URL.createObjectURL(mb);
+}catch(e){}
+
+// Preloader
+window.addEventListener('load',()=>{
+  const pl=document.getElementById('preloader');
+  setTimeout(()=>{
+    pl.classList.add('hidden');
+    setTimeout(()=>{if(pl.parentNode)pl.parentNode.removeChild(pl);},450);
+  },700);
+});
+
+// PWA registration
+window.PWA?.registerPwa?.();
+</script>
+</body>
+</html>
+
