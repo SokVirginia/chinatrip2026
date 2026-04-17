@@ -1,7 +1,8 @@
 (() => {
   function toggleLocal(btn) {
     btn.classList.toggle('open');
-    btn.nextElementSibling.classList.toggle('open');
+    const panel = btn.closest('.city-section').querySelector('.local-panel');
+    if (panel) panel.classList.toggle('open');
   }
 
   function toggleDetail(btn) {
