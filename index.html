@@ -499,40 +499,34 @@ try{
   document.getElementById('manifest-link').href=URL.createObjectURL(mb);
 }catch(e){}
 
-const SW_CODE=`
-const CACHE='china-2026-v1';
-self.addEventListener('install',e=>{
-  e.waitUntil(
-    caches.open(CACHE).then(c=>c.add('/')).then(()=>self.skipWaiting())
-  );
-});
-self.addEventListener('activate',e=>{
-  e.waitUntil(
-    caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k))))
-    .then(()=>self.clients.claim())
-  );
-});
-self.addEventListener('fetch',e=>{
-  e.respondWith(
-    caches.match(e.request).then(cached=>{
-      const fresh=fetch(e.request).then(r=>{
-        if(r&&r.status===200){
-          const cl=r.clone();
-          caches.open(CACHE).then(c=>c.put(e.request,cl));
-        }
-        return r;
-      }).catch(()=>cached);
-      return cached||fresh;
-    })
-  );
-});
-`;
-if('serviceWorker' in navigator){
-  try{
-    const swb=new Blob([SW_CODE],{type:'application/javascript'});
-    const swu=URL.createObjectURL(swb);
-    navigator.serviceWorker.register(swu).catch(()=>{});
-  }catch(e){}
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', async () => {
+    try {
+      const reg = await navigator.serviceWorker.register('./sw.js', { scope: './' });
+
+      // Force update check on each launch (helps PWA pick up new versions).
+      reg.update();
+
+      // If there's a new SW, ask it to activate immediately.
+      reg.addEventListener('updatefound', () => {
+        const sw = reg.installing;
+        if (!sw) return;
+        sw.addEventListener('statechange', () => {
+          if (sw.state === 'installed' && navigator.serviceWorker.controller) {
+            sw.postMessage({ type: 'SKIP_WAITING' });
+          }
+        });
+      });
+
+      // Reload once when the controller changes so the new SW controls the page.
+      let reloaded = false;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (reloaded) return;
+        reloaded = true;
+        window.location.reload();
+      });
+    } catch (e) {}
+  });
 }
 
 window.addEventListener('load',()=>{
