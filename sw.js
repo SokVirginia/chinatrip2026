@@ -1,5 +1,5 @@
 /* Service worker for offline support and fast updates */
-const VERSION = 'v3';
+const VERSION = 'v4';
 const STATIC_CACHE = `chinatrip-static-${VERSION}`;
 
 // App shell (important for GitHub Pages / non-root hosting)
@@ -9,6 +9,7 @@ const PRECACHE_URLS = [
   './sw.js',
   './src/utils.js',
   './src/ui.js',
+  './src/statusbar.js',
   './src/timeline.js',
   './src/pwa.js',
   './src/main.js',

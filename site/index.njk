@@ -61,6 +61,7 @@
 </div>
 
 <script src="./src/ui.js"></script>
+<script src="./src/statusbar.js"></script>
 <script src="./src/pwa.js"></script>
 <script>
 // Keep existing manifest/icon generation in the output.
@@ -93,6 +94,8 @@ window.addEventListener('load',()=>{
 
 // PWA registration
 window.PWA?.registerPwa?.();
+// Statusbar (current/next)
+window.Statusbar?.init?.();
 </script>
 </body>
 </html>
