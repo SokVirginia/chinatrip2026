@@ -157,19 +157,21 @@ svg.ic{width:16px;height:16px;display:block}
 .local-inner{padding:8px 0 10px}
 
 .ltile{background:var(--bg2);border:none;box-shadow:var(--sh-sm);border-radius:var(--rmd);margin-bottom:12px;overflow:hidden}
-.ltile-head{display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer;min-width:0}
-.ltile-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--bg2);box-shadow:var(--sh-in-sm)}
-.ltile-main{flex:1;min-width:0}
+.ltile-head{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;cursor:pointer;min-width:0}
+.ltile-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--bg2);box-shadow:var(--sh-sm);margin-top:2px}
+.ltile-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.ltile-info{display:flex;flex-direction:column;gap:2px}
 .ltile-title{font-size:13px;font-weight:600;color:var(--tx)}
-.ltile-sub{font-size:11px;color:var(--tx3);margin-top:2px}
-.ltile-meta{display:flex;flex-direction:column;gap:8px;align-items:flex-end;flex-shrink:0;max-width:140px}
-.ltile-price{font-size:12px;font-weight:500;color:var(--tx2);max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right}
+.ltile-sub{font-size:11px;color:var(--tx3)}
+.ltile-meta{display:flex;flex-direction:column;gap:8px;align-items:flex-start;flex-shrink:0}
+.ltile-price{font-size:12px;font-weight:500;color:var(--tx2);white-space:nowrap}
 .ltile-expand{
   font-size:10px;font-weight:600;color:var(--tx2);
   padding:4px 10px;border:none;
   border-radius:12px;cursor:pointer;
   transition:all .2s ease;white-space:nowrap;
-  background:var(--bg2);box-shadow:var(--sh-sm);font-family:var(--f)
+  background:var(--bg2);box-shadow:var(--sh-sm);font-family:var(--f);
+  width:fit-content;
 }
 .ltile-expand:active{transform:scale(0.96);box-shadow:var(--sh-in-sm)}
 .ltile-detail{max-height:0;overflow:hidden;transition:max-height .25s ease}
@@ -181,8 +183,6 @@ svg.ic{width:16px;height:16px;display:block}
 .dval{color:var(--tx2);font-weight:500}
 
 @media(max-width:420px){
-  .ltile-meta{max-width:110px}
-  .ltile-price{max-width:110px}
   .dlbl{min-width:80px}
 }
 .warn-row{
