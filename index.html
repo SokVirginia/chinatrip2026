@@ -70,6 +70,45 @@ body{
 .sv{font-size:22px;font-weight:500;color:var(--tx);line-height:1.2}
 .sl{font-size:12px;color:var(--tx3);margin-top:2px}
 
+.timeline{display:flex;flex-direction:column;gap:12px}
+.city-section{
+  background:var(--bg2);
+  border:0.5px solid var(--br);
+  box-shadow:var(--sh);
+  border-radius:18px;
+  padding:12px 12px;
+}
+.city-section .city-row{padding:2px 0 6px}
+.city-section .leg-row{padding:2px 0}
+.city-section .linfo{padding:2px 0 8px}
+
+.leg-section{
+  background:var(--bg2);
+  border:0.5px solid var(--br);
+  box-shadow:var(--sh);
+  border-radius:18px;
+  padding:12px 12px;
+}
+.leg-section .leg-row{padding:0}
+.leg-section .linfo{padding:2px 0 0}
+.leg-section .llt{height:0}
+.leg-section .llb{display:none}
+
+.leg-group{display:flex;flex-direction:column;gap:0}
+.leg-group .leg-section{border-radius:0;margin:0;border-bottom:0;box-shadow:var(--sh)}
+.leg-group .leg-section:last-child{border-bottom:0.5px solid var(--br)}
+.leg-group .leg-section:first-child{border-top-left-radius:18px;border-top-right-radius:18px}
+.leg-group .leg-section:last-child{border-bottom-left-radius:18px;border-bottom-right-radius:18px}
+.transfer-note{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:8px 12px;
+  background:var(--bg);
+  border-left:0.5px solid var(--br);
+  border-right:0.5px solid var(--br);
+  font-size:11px;color:var(--tx3)
+}
+.transfer-note strong{font-weight:600;color:var(--tx2)}
+
 .city-row{display:flex;align-items:flex-start}
 .spine{display:flex;flex-direction:column;align-items:center;width:40px;flex-shrink:0}
 .cdot{width:14px;height:14px;border-radius:50%;border:2px solid var(--bg);flex-shrink:0;position:relative;z-index:2}
@@ -249,20 +288,27 @@ svg.ic{width:12px;height:12px;display:block}
 
 <div class="timeline">
 
+  <div class="city-section">
   <div class="city-row">
     <div class="spine"><div class="cdot d-kja"></div><div class="sline ltravel" style="height:48px"></div></div>
     <div class="ccard"><div class="ctitle"><span class="cname">Красноярск</span><span class="cdates">18 апреля</span></div><div class="chotel" style="padding-bottom:10px">Вылет · KJA</div></div>
   </div>
+  </div>
 
+  <div class="leg-section" data-event="s7-6432">
   <div class="leg-row">
     <div class="lspine"><div class="llt ltravel"></div><div class="liw ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg></div><div class="llb ltravel"></div></div>
     <div class="linfo"><div class="lmain">S7 6432 → Иркутск<span class="badge bp">✈ 1ч 40м</span></div><div class="lsub">21:05 → 23:45 · пересадка</div></div>
   </div>
+  </div>
+  <div class="leg-section" data-event="s7-6311">
   <div class="leg-row">
     <div class="lspine"><div class="llt ltravel"></div><div class="liw ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg></div><div class="llb ltravel"></div></div>
     <div class="linfo"><div class="lmain">S7 6311 → Пекин Дасин<span class="badge bp">✈ 2ч 55м</span></div><div class="lsub">01:40 → 04:35 · 19 апреля</div></div>
   </div>
+  </div>
 
+  <div class="city-section">
   <div class="city-row">
     <div class="spine"><div class="cdot d-bj"></div><div class="sline lstay" style="height:10px"></div></div>
     <div class="ccard">
@@ -294,11 +340,16 @@ svg.ic{width:12px;height:12px;display:block}
     </div>
   </div>
 
+  </div>
+
+  <div class="leg-section" data-event="train-bj-zjj">
   <div class="leg-row">
     <div class="lspine"><div class="llt lstay"></div><div class="liw itr"><svg class="ic" viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="10" rx="2" stroke="#3B6D11" stroke-width="1.2" fill="none"/><rect x="5" y="4" width="2.5" height="3" rx="0.5" fill="#3B6D11"/><rect x="8.5" y="4" width="2.5" height="3" rx="0.5" fill="#3B6D11"/><line x1="5" y1="9" x2="11" y2="9" stroke="#3B6D11" stroke-width="1"/><line x1="4" y1="12" x2="6.5" y2="12" stroke="#3B6D11" stroke-width="1.2" stroke-linecap="round"/><line x1="9.5" y1="12" x2="12" y2="12" stroke="#3B6D11" stroke-width="1.2" stroke-linecap="round"/></svg></div><div class="llb ltravel"></div></div>
     <div class="linfo"><div class="lmain">Пекин-Западный → Чжанцзядзе-Западный<span class="badge bt">18ч 06м</span><span class="badge bw">⚠ возврат</span></div><div class="lsub">22 апр 11:14 → 23 апр 05:20</div></div>
   </div>
+  </div>
 
+  <div class="city-section">
   <div class="city-row">
     <div class="spine"><div class="cdot d-zjj"></div><div class="sline lstay" style="height:10px"></div></div>
     <div class="ccard">
@@ -328,11 +379,16 @@ svg.ic{width:12px;height:12px;display:block}
     </div>
   </div>
 
+  </div>
+
+  <div class="leg-section" data-event="train-zjj-frz">
   <div class="leg-row">
     <div class="lspine"><div class="llt lstay"></div><div class="liw ifa"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M1 9l4-6h6l4 6H1z" stroke="#085041" stroke-width="1.2" fill="none" stroke-linejoin="round"/><line x1="8" y1="3" x2="8" y2="9" stroke="#085041" stroke-width="1"/><line x1="1" y1="11" x2="15" y2="11" stroke="#085041" stroke-width="1.2"/><line x1="3" y1="13" x2="5" y2="13" stroke="#085041" stroke-width="1.2" stroke-linecap="round"/><line x1="11" y1="13" x2="13" y2="13" stroke="#085041" stroke-width="1.2" stroke-linecap="round"/></svg></div><div class="llb ltravel"></div></div>
     <div class="linfo"><div class="lmain">Чжанцзядзе-Зап. → Фужунчжэнь<span class="badge bf">⚡ 23 мин</span></div><div class="lsub">27 апр · 12:47 → 13:10</div></div>
   </div>
+  </div>
 
+  <div class="city-section">
   <div class="city-row">
     <div class="spine"><div class="cdot d-frz"></div><div class="sline lstay" style="height:10px"></div></div>
     <div class="ccard">
@@ -370,15 +426,22 @@ svg.ic{width:12px;height:12px;display:block}
     </div>
   </div>
 
+  </div>
+
+  <div class="leg-section" data-event="train-frz-zjj">
   <div class="leg-row">
     <div class="lspine"><div class="llt lstay"></div><div class="liw ifa"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M1 9l4-6h6l4 6H1z" stroke="#085041" stroke-width="1.2" fill="none" stroke-linejoin="round"/><line x1="8" y1="3" x2="8" y2="9" stroke="#085041" stroke-width="1"/><line x1="1" y1="11" x2="15" y2="11" stroke="#085041" stroke-width="1.2"/><line x1="3" y1="13" x2="5" y2="13" stroke="#085041" stroke-width="1.2" stroke-linecap="round"/><line x1="11" y1="13" x2="13" y2="13" stroke="#085041" stroke-width="1.2" stroke-linecap="round"/></svg></div><div class="llb ltravel"></div></div>
     <div class="linfo"><div class="lmain">Фужунчжэнь → Чжанцзядзе-Зап.<span class="badge bf">⚡ 23 мин</span></div><div class="lsub">28 апр · 12:05 → 12:28 · затем такси до DYG</div></div>
   </div>
+  </div>
+  <div class="leg-section" data-event="ho1222">
   <div class="leg-row">
     <div class="lspine"><div class="llt ltravel"></div><div class="liw ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg></div><div class="llb ltravel"></div></div>
     <div class="linfo"><div class="lmain">HO1222 · DYG → Шанхай Пудун<span class="badge bp">✈ 2ч 05м</span></div><div class="lsub">28 апр · 16:25 → 18:30</div></div>
   </div>
+  </div>
 
+  <div class="city-section">
   <div class="city-row">
     <div class="spine"><div class="cdot d-sh"></div><div class="sline lstay" style="height:10px"></div></div>
     <div class="ccard">
@@ -410,11 +473,16 @@ svg.ic{width:12px;height:12px;display:block}
     </div>
   </div>
 
+  </div>
+
+  <div class="leg-section" data-event="cz8880">
   <div class="leg-row">
     <div class="lspine"><div class="llt lstay"></div><div class="liw ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg></div><div class="llb ltravel"></div></div>
     <div class="linfo"><div class="lmain">CZ8880 · SHA Hongqiao → Пекин Дасин<span class="badge bp">✈ 2ч 10м</span></div><div class="lsub">2 мая · 15:30 → 17:40</div></div>
   </div>
+  </div>
 
+  <div class="city-section">
   <div class="city-row">
     <div class="spine"><div class="cdot d-bj"></div><div class="sline lstay" style="height:10px"></div></div>
     <div class="ccard">
@@ -443,18 +511,26 @@ svg.ic{width:12px;height:12px;display:block}
     </div>
   </div>
 
+  </div>
+
+  <div class="leg-section" data-event="s7-6312">
   <div class="leg-row">
     <div class="lspine"><div class="llt lstay"></div><div class="liw ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg></div><div class="llb ltravel"></div></div>
     <div class="linfo"><div class="lmain">S7 6312 · PKX → Иркутск<span class="badge bp">✈ 3ч 10м</span><span class="badge bw">⚠ 05:35</span></div><div class="lsub">4 мая · выезд ~03:30</div></div>
   </div>
+  </div>
+  <div class="leg-section" data-event="s7-6431">
   <div class="leg-row">
     <div class="lspine"><div class="llt ltravel"></div><div class="liw ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg></div><div class="llb ltravel" style="min-height:4px"></div></div>
     <div class="linfo"><div class="lmain">S7 6431 · Иркутск → Красноярск<span class="badge bp">✈ 1ч 40м</span></div><div class="lsub">4 мая · 19:50 → 20:30</div></div>
   </div>
+  </div>
 
+  <div class="city-section">
   <div class="city-row">
     <div class="spine"><div class="cdot d-kja"></div></div>
     <div class="ccard"><div class="ctitle"><span class="cname">Красноярск</span><span class="cdates">4 мая</span></div><div class="chotel" style="padding-bottom:16px">Домой</div></div>
+  </div>
   </div>
 
 </div>
@@ -725,6 +801,68 @@ function renderSB(){
 renderSB();
 setInterval(renderSB,30000);
 // ── END STATUSBAR ────────────────────────────────────────────
+
+function parseFromTo(title){
+  // e.g. "S7 6432 · Красноярск → Иркутск"
+  const m = title.match(/·\s*([^→]+?)\s*→\s*(.+)$/);
+  if(!m) return {from:null,to:null};
+  return {from:m[1].trim(),to:m[2].trim()};
+}
+function hotelCity(title){
+  // e.g. "Jialong Hotel · Пекин"
+  const parts = title.split('·').map(s=>s.trim());
+  return parts.length>=2 ? parts[parts.length-1] : title.trim();
+}
+function fmtGap(ms){
+  const tot=Math.round(ms/60000);
+  const h=Math.floor(tot/60),m=tot%60;
+  if(h<=0) return `${m}м`;
+  if(m===0) return `${h}ч`;
+  return `${h}ч ${m}м`;
+}
+function applyTransferGroups(){
+  const byId = new Map(EVENTS.map(e=>[e.id,e]));
+  const cards = [...document.querySelectorAll('.leg-section[data-event]')];
+  const hotels = EVENTS.filter(e=>e.type==='hotel');
+
+  let i=0;
+  while(i<cards.length-1){
+    const aId = cards[i].getAttribute('data-event');
+    const bId = cards[i+1].getAttribute('data-event');
+    const a = byId.get(aId);
+    const b = byId.get(bId);
+    if(!a || !b || a.type!=='plane' || b.type!=='plane'){ i++; continue; }
+
+    const aFT = parseFromTo(a.title);
+    const bFT = parseFromTo(b.title);
+    if(!aFT.to || !bFT.from || aFT.to !== bFT.from){ i++; continue; }
+
+    const gap = b.start - a.end;
+    if(!(gap>0 && gap <= 12*60*60*1000)){ i++; continue; }
+
+    const hasHotel = hotels.some(h=>{
+      const c = hotelCity(h.title);
+      return c===aFT.to && h.start<=a.end && h.end>=b.start;
+    });
+    if(hasHotel){ i++; continue; }
+
+    // Create group wrapper and insert between cards.
+    const group = document.createElement('div');
+    group.className = 'leg-group';
+    const note = document.createElement('div');
+    note.className = 'transfer-note';
+    note.innerHTML = `<strong>Пересадка · ${aFT.to}</strong><span>${fmtGap(gap)}</span>`;
+
+    const parent = cards[i].parentNode;
+    parent.insertBefore(group, cards[i]);
+    group.appendChild(cards[i]);
+    group.appendChild(note);
+    group.appendChild(cards[i+1]);
+
+    i += 2;
+  }
+}
+document.addEventListener('DOMContentLoaded', applyTransferGroups);
 </script>
 </body>
 </html>
