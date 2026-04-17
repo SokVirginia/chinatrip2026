@@ -28,8 +28,20 @@
       {% if day.events | length %}
       <div class="ds-events">
         {% for ev in day.events %}
-        <div class="ds-ev ds-ev-{{ ev.kind }}">
-          <span class="ds-ev-icon">{{ ev.icon }}</span>
+        <div class="ds-ev">
+          <span class="ds-ev-icon {% if ev.iconKind == 'plane' %}ip{% elif ev.iconKind == 'train' %}itr{% elif ev.iconKind == 'hotel-in' or ev.iconKind == 'hotel-out' %}ihot{% else %}ifa{% endif %}">
+            {% if ev.iconKind == 'plane' %}
+              <svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg>
+            {% elif ev.iconKind == 'train' %}
+              <svg class="ic" viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="10" rx="2" stroke="#3B6D11" stroke-width="1.2" fill="none"/><rect x="5" y="4" width="2.5" height="3" rx="0.5" fill="#3B6D11"/><rect x="8.5" y="4" width="2.5" height="3" rx="0.5" fill="#3B6D11"/><line x1="5" y1="9" x2="11" y2="9" stroke="#3B6D11" stroke-width="1"/><line x1="4" y1="12" x2="6.5" y2="12" stroke="#3B6D11" stroke-width="1.2" stroke-linecap="round"/><line x1="9.5" y1="12" x2="12" y2="12" stroke="#3B6D11" stroke-width="1.2" stroke-linecap="round"/></svg>
+            {% elif ev.iconKind == 'hotel-in' %}
+              <svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10V8C2 7.4 2.5 7 3 7H13C13.5 7 14 7.4 14 8V10" stroke="#9b4565" stroke-width="1.2" stroke-linecap="round"/><rect x="1.5" y="10" width="13" height="3" rx="1" stroke="#9b4565" stroke-width="1.2"/><line x1="2" y1="13" x2="2" y2="14.5" stroke="#9b4565" stroke-width="1.2" stroke-linecap="round"/><line x1="14" y1="13" x2="14" y2="14.5" stroke="#9b4565" stroke-width="1.2" stroke-linecap="round"/><line x1="2" y1="10" x2="2" y2="7" stroke="#9b4565" stroke-width="1.2" stroke-linecap="round"/><rect x="3" y="4.5" width="4.5" height="3" rx="1" stroke="#9b4565" stroke-width="1"/></svg>
+            {% elif ev.iconKind == 'hotel-out' %}
+              <svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M7 13H4C3.4 13 3 12.6 3 12V4C3 3.4 3.4 3 4 3H7" stroke="#9b4565" stroke-width="1.2" stroke-linecap="round"/><line x1="8" y1="8" x2="14" y2="8" stroke="#9b4565" stroke-width="1.2" stroke-linecap="round"/><polyline points="11.5,5.5 14,8 11.5,10.5" stroke="#9b4565" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="5" cy="8" r="1" fill="#9b4565"/></svg>
+            {% else %}
+              <svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M8 2C5.8 2 4 3.8 4 6c0 3 4 8 4 8s4-5 4-8c0-2.2-1.8-4-4-4zm0 5.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" fill="#1D9E75"/></svg>
+            {% endif %}
+          </span>
           <span class="ds-ev-text">{{ ev.text }}</span>
         </div>
         {% endfor %}

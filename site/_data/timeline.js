@@ -178,31 +178,30 @@ function buildDays(legs, stays, locals) {
 
     for (const leg of legs) {
       const isPlane = leg.kind === 'plane';
-      const icon = isPlane ? '✈' : '🚄';
-      const iconArr = isPlane ? '🛬' : '🚄';
+      const iconKind = isPlane ? 'plane' : 'train';
       const depK = dateKey(leg.depDate);
       const arrK = dateKey(leg.arrDate);
 
       if (depK === k) {
         if (depK === arrK) {
-          events.push({ icon, text: `${leg.fromCity} → ${leg.toCity}, ${fmtTime(leg.depTime)} – ${fmtTime(leg.arrTime)}`, kind: leg.kind, order: leg.depTime.h * 60 + leg.depTime.mi });
+          events.push({ iconKind, text: `${leg.fromCity} → ${leg.toCity}, ${fmtTime(leg.depTime)} – ${fmtTime(leg.arrTime)}`, order: leg.depTime.h * 60 + leg.depTime.mi });
         } else {
-          events.push({ icon, text: `${leg.fromCity} → ${leg.toCity}, отправление ${fmtTime(leg.depTime)}`, kind: leg.kind, order: leg.depTime.h * 60 + leg.depTime.mi });
+          events.push({ iconKind, text: `${leg.fromCity} → ${leg.toCity}, отправление ${fmtTime(leg.depTime)}`, order: leg.depTime.h * 60 + leg.depTime.mi });
         }
       }
       if (arrK === k && arrK !== depK) {
-        events.push({ icon: iconArr, text: `Прибытие: ${leg.toCity}, ${fmtTime(leg.arrTime)}`, kind: leg.kind, order: leg.arrTime.h * 60 + leg.arrTime.mi });
+        events.push({ iconKind, text: `Прибытие: ${leg.toCity}, ${fmtTime(leg.arrTime)}`, order: leg.arrTime.h * 60 + leg.arrTime.mi });
       }
     }
 
     for (const stay of stays) {
-      if (dateKey(stay.start) === k) events.push({ icon: '🏨', text: `Заселение: ${stay.hotel}`, kind: 'hotel', order: 1400 });
-      if (dateKey(stay.end)   === k) events.push({ icon: '📤', text: `Выезд из: ${stay.city}`,  kind: 'hotel', order: 90  });
+      if (dateKey(stay.start) === k) events.push({ iconKind: 'hotel-in',  text: `Заселение: ${stay.hotel}`, order: 1400 });
+      if (dateKey(stay.end)   === k) events.push({ iconKind: 'hotel-out', text: `Выезд из: ${stay.city}`,   order: 90  });
     }
 
     for (const li of locals) {
       if (li.date && dateKey(li.date) === k) {
-        events.push({ icon: '🚕', text: li.title, kind: 'local', order: 1200 });
+        events.push({ iconKind: 'local', text: li.title, order: 1200 });
       }
     }
 
