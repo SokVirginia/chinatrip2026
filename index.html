@@ -15,17 +15,19 @@
 <link rel="manifest" id="manifest-link">
 <style>
 :root{
-  --bg:#ffffff;--bg2:#f5f5f2;--bg3:#eeece6;
-  --tx:#1a1a18;--tx2:#5f5e5a;--tx3:#888780;
-  --br:rgba(0,0,0,0.12);--br2:rgba(0,0,0,0.22);
-  --rmd:8px;--rlg:12px;
+  --bg:#f2f2f7;--bg2:#ffffff;--bg3:#e5e5ea;
+  --tx:#000000;--tx2:#3c3c43;--tx3:#8e8e93;
+  --br:rgba(0,0,0,0.08);--br2:rgba(0,0,0,0.15);
+  --rmd:12px;--rlg:16px;
+  --sh:0 2px 8px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.04);
   --f:system-ui,-apple-system,sans-serif;
 }
 @media(prefers-color-scheme:dark){
   :root{
-    --bg:#1e1e1c;--bg2:#2a2a27;--bg3:#333330;
-    --tx:#e8e6de;--tx2:#a8a69e;--tx3:#6e6d67;
+    --bg:#000000;--bg2:#1c1c1e;--bg3:#2c2c2e;
+    --tx:#ffffff;--tx2:#ebebf5;--tx3:#8e8e93;
     --br:rgba(255,255,255,0.1);--br2:rgba(255,255,255,0.18);
+    --sh:none;
   }
   .bp{background:#0c447c!important;color:#b5d4f4!important}
   .bt{background:#27500a!important;color:#c0dd97!important}
@@ -64,7 +66,7 @@ body{
 
 .rw{padding:.5rem 0}
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:2rem}
-.stat{background:var(--bg2);border-radius:var(--rmd);padding:.75rem 1rem}
+.stat{background:var(--bg2);border-radius:var(--rmd);padding:.75rem 1rem;box-shadow:var(--sh);border:0.5px solid var(--br)}
 .sv{font-size:22px;font-weight:500;color:var(--tx);line-height:1.2}
 .sl{font-size:12px;color:var(--tx3);margin-top:2px}
 
@@ -98,20 +100,22 @@ svg.ic{width:12px;height:12px;display:block}
 .local-btn{
   display:flex;align-items:center;gap:6px;margin:4px 0 8px;
   cursor:pointer;background:var(--bg2);
-  border:0.5px solid var(--br);border-radius:var(--rmd);
-  padding:5px 10px;font-size:11px;color:var(--tx2);
+  border:0.5px solid var(--br);border-radius:20px;
+  padding:6px 12px;font-size:11px;color:var(--tx2);
   width:fit-content;user-select:none;
-  transition:background .15s;font-family:var(--f)
+  transition:all .15s ease;font-family:var(--f);
+  box-shadow:var(--sh)
 }
 .local-btn:hover{background:var(--bg3)}
+.local-btn:active{transform:scale(0.96)}
 .local-btn .arr{font-size:9px;transition:transform .2s;display:inline-block;color:var(--tx3)}
 .local-btn.open .arr{transform:rotate(90deg)}
 .local-panel{overflow:hidden;max-height:0;transition:max-height .35s ease}
 .local-panel.open{max-height:3000px}
 .local-inner{padding:4px 0 10px}
 
-.ltile{background:var(--bg);border:0.5px solid var(--br);border-radius:var(--rmd);margin-bottom:8px;overflow:hidden}
-.ltile-head{display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer}
+.ltile{background:var(--bg2);border:0.5px solid var(--br);box-shadow:var(--sh);border-radius:var(--rmd);margin-bottom:10px;overflow:hidden}
+.ltile-head{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer}
 .ltile-main{flex:1}
 .ltile-title{font-size:12px;font-weight:500;color:var(--tx2);transition:color .15s}
 .ltile-head:hover .ltile-title{color:var(--tx)}
@@ -120,15 +124,16 @@ svg.ic{width:12px;height:12px;display:block}
 .ltile-price{font-size:11px;color:var(--tx3)}
 .ltile-expand{
   font-size:10px;color:var(--tx3);
-  padding:1px 6px;border:0.5px solid var(--br);
-  border-radius:3px;cursor:pointer;
-  transition:background .15s;white-space:nowrap;
-  background:transparent;font-family:var(--f)
+  padding:3px 8px;border:0.5px solid var(--br);
+  border-radius:12px;cursor:pointer;
+  transition:all .15s ease;white-space:nowrap;
+  background:var(--bg);font-family:var(--f)
 }
-.ltile-expand:hover{background:var(--bg2)}
+.ltile-expand:hover{background:var(--bg3)}
+.ltile-expand:active{transform:scale(0.96)}
 .ltile-detail{max-height:0;overflow:hidden;transition:max-height .25s ease}
 .ltile-detail.open{max-height:500px}
-.ltile-detail-inner{padding:0 10px 10px;border-top:0.5px solid var(--br)}
+.ltile-detail-inner{padding:0 12px 12px;border-top:0.5px solid var(--br)}
 .drow{display:flex;gap:6px;padding:4px 0;font-size:11px;border-bottom:0.5px solid var(--br)}
 .drow:last-child{border-bottom:none}
 .dlbl{color:var(--tx3);min-width:90px;flex-shrink:0}
@@ -143,7 +148,7 @@ svg.ic{width:12px;height:12px;display:block}
 .ld{width:8px;height:8px;border-radius:50%;display:inline-block}
 
 .sb-wrap{margin-bottom:1.5rem}
-.sb-card{background:var(--bg);border:0.5px solid var(--br);border-radius:var(--rlg);padding:14px 16px;margin-bottom:8px}
+.sb-card{background:var(--bg2);border:0.5px solid var(--br);box-shadow:var(--sh);border-radius:var(--rlg);padding:16px 18px;margin-bottom:12px}
 .sb-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .sb-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:19px}
 .sb-icon-plane{background:#E6F1FB}
@@ -172,14 +177,14 @@ svg.ic{width:12px;height:12px;display:block}
 .sb-det{flex:1;min-width:0}
 .sb-det-lbl{font-size:10px;color:var(--tx3)}
 .sb-det-val{font-size:11px;color:var(--tx2);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sb-next{display:flex;align-items:center;gap:10px;background:var(--bg2);border-radius:10px;padding:10px 12px}
+.sb-next{display:flex;align-items:center;gap:12px;background:transparent;border:0.5px solid var(--br2);box-shadow:none;border-radius:var(--rlg);padding:12px 16px}
 .sb-next-icon{width:28px;height:28px;border-radius:7px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
 .sb-next-meta{flex:1;min-width:0}
 .sb-next-lbl{font-size:10px;color:var(--tx3);font-weight:500;letter-spacing:.05em;text-transform:uppercase}
 .sb-next-title{font-size:12px;font-weight:500;color:var(--tx);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sb-next-sub{font-size:11px;color:var(--tx2);margin-top:1px}
 .sb-next-in{font-size:11px;color:var(--tx3);flex-shrink:0;text-align:right;margin-left:8px;white-space:nowrap}
-.sb-idle{background:var(--bg2);border-radius:var(--rlg);padding:12px 16px;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.sb-idle{background:transparent;border:0.5px solid var(--br2);box-shadow:none;border-radius:var(--rlg);padding:16px 18px;display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .sb-idle-meta{flex:1;min-width:0}
 .sb-idle-lbl{font-size:10px;color:var(--tx3);font-weight:500;letter-spacing:.06em;text-transform:uppercase}
 .sb-idle-title{font-size:13px;font-weight:500;color:var(--tx);margin-top:2px}
