@@ -1,0 +1,25 @@
+<div class="ltile">
+  <div class="ltile-head">
+    <div class="ltile-icon ip">
+      <svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M8 2C5.8 2 4 3.8 4 6c0 3 4 8 4 8s4-5 4-8c0-2.2-1.8-4-4-4zm0 5.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" fill="#378ADD"/></svg>
+    </div>
+    <div class="ltile-main">
+      <div class="ltile-title">{{ tile.title }}</div>
+      <div class="ltile-sub">{{ tile.sub }}</div>
+    </div>
+    <div class="ltile-meta">
+      {% if tile.price %}<span class="ltile-price">{{ tile.price }}</span>{% endif %}
+      <button class="ltile-expand" onclick="toggleDetail(this)">подробнее</button>
+    </div>
+  </div>
+  <div class="ltile-detail">
+    <div class="ltile-detail-inner">
+      {% for det in tile.details %}
+      <div class="drow">
+        <span class="dlbl">{{ det.key }}</span>
+        <span class="dval">{{ det.value }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

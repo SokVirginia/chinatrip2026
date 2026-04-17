@@ -1,0 +1,19 @@
+<div class="leg-section">
+  <div class="leg-row">
+    <div class="lspine">
+      <div class="llt ltravel"></div>
+      <div class="liw {{ leg.iconWrapClass }}">
+        {% if leg.iconKind == 'plane' %}
+          <svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg>
+        {% else %}
+          <svg class="ic" viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="10" rx="2" stroke="#3B6D11" stroke-width="1.2" fill="none"/><rect x="5" y="4" width="2.5" height="3" rx="0.5" fill="#3B6D11"/><rect x="8.5" y="4" width="2.5" height="3" rx="0.5" fill="#3B6D11"/><line x1="5" y1="9" x2="11" y2="9" stroke="#3B6D11" stroke-width="1"/><line x1="4" y1="12" x2="6.5" y2="12" stroke="#3B6D11" stroke-width="1.2" stroke-linecap="round"/><line x1="9.5" y1="12" x2="12" y2="12" stroke="#3B6D11" stroke-width="1.2" stroke-linecap="round"/></svg>
+        {% endif %}
+      </div>
+      <div class="llb ltravel"></div>
+    </div>
+    <div class="linfo">
+      <div class="lmain">{{ leg.fromCity }} → {{ leg.toCity }}<span class="badge {{ leg.badgeClass }}">{{ leg.badgeIcon }}</span></div>
+      <div class="lsub">{{ leg.depStr }} → {{ leg.arrStr }}</div>
+    </div>
+  </div>
+</div>

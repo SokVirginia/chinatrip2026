@@ -1,20 +1,15 @@
 /* Service worker for offline support and fast updates */
-const VERSION = 'v4';
+const VERSION = 'v5';
 const STATIC_CACHE = `chinatrip-static-${VERSION}`;
 
-// App shell (important for GitHub Pages / non-root hosting)
+// App shell (timeline is now SSG — no src/timeline.js or src/main.js needed)
 const PRECACHE_URLS = [
   './',
   './index.html',
   './sw.js',
-  './src/utils.js',
   './src/ui.js',
   './src/statusbar.js',
-  './src/timeline.js',
-  './src/pwa.js',
-  './src/main.js',
-  './data/marshrut-kitay-v11.md',
-  './data/local-transport.md'
+  './src/pwa.js'
 ];
 
 self.addEventListener('install', (event) => {

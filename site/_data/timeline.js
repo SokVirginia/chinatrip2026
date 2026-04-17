@@ -11,8 +11,16 @@ const RU_MONTHS = {
   'июля': 7, 'августа': 8, 'сентября': 9, 'октября': 10, 'ноября': 11, 'декабря': 12
 };
 
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const CITY_DOT = {
+  'Красноярск': 'd-kja', 'Иркутск': 'd-kja',
+  'Пекин': 'd-bj',
+  'Чжанцзядзе': 'd-zjj',
+  'Фужунчжэнь': 'd-frz',
+  'Шанхай': 'd-sh'
+};
+
+function cityDot(city) {
+  return CITY_DOT[city] || 'd-bj';
 }
 
 function parseRuDate(s) {
@@ -35,7 +43,6 @@ function dateKey(d) {
 }
 
 function addDays(d, delta) {
-  // naive date add, good enough for this itinerary window
   const js = new Date(Date.UTC(d.y, d.mo - 1, d.d + delta, 12, 0));
   return { y: js.getUTCFullYear(), mo: js.getUTCMonth() + 1, d: js.getUTCDate() };
 }
@@ -46,7 +53,7 @@ function fmtDate(d) {
 }
 
 function fmtDateTime(d, t) {
-  return `${fmtDate(d)} ${String(t.h).padStart(2,'0')}:${String(t.mi).padStart(2,'0')}`;
+  return `${fmtDate(d)} ${String(t.h).padStart(2, '0')}:${String(t.mi).padStart(2, '0')}`;
 }
 
 function parseMdBlocks(md) {
@@ -80,41 +87,37 @@ function parseRoute(md) {
         const dep = parseTime(b.kv['Время отправления']);
         const arr = parseTime(b.kv['Время прибытия']);
         if (!d || !dep || !arr) continue;
-        const fromCity = b.kv['Город отправления'] || '';
-        const toCity = b.kv['Город прибытия'] || '';
-        const code = b.kv['Номер рейса'] || '';
         let arrDate = d;
         if ((arr.h * 60 + arr.mi) < (dep.h * 60 + dep.mi)) arrDate = addDays(d, 1);
-        legs.push({ kind: 'plane', fromCity, toCity, code, depDate: d, depTime: dep, arrDate, arrTime: arr });
+        legs.push({
+          kind: 'plane',
+          fromCity: b.kv['Город отправления'] || '',
+          toCity: b.kv['Город прибытия'] || '',
+          depDate: d, depTime: dep, arrDate, arrTime: arr
+        });
       } else if (kind.includes('поезд')) {
         const depD = parseRuDate(b.kv['Дата отправления'] || b.kv['Дата']);
         const depT = parseTime(b.kv['Время отправления']);
         const arrD = parseRuDate(b.kv['Дата прибытия'] || b.kv['Дата']);
         const arrT = parseTime(b.kv['Время прибытия']);
         if (!depD || !depT || !arrD || !arrT) continue;
-        const fromCity = b.kv['Город отправления'] || '';
-        const toCity = b.kv['Город прибытия'] || '';
-        stays.push(); // no-op
-        legs.push({ kind: 'train', fromCity, toCity, label: b.kv['Вид транспорта'] || 'поезд', depDate: depD, depTime: depT, arrDate: arrD, arrTime: arrT });
+        legs.push({
+          kind: 'train',
+          fromCity: b.kv['Город отправления'] || '',
+          toCity: b.kv['Город прибытия'] || '',
+          depDate: depD, depTime: depT, arrDate: arrD, arrTime: arrT
+        });
       }
       continue;
     }
 
-    // Stays (section 2 blocks)
     if (b.kv['Отель'] && b.kv['Город'] && b.kv['Даты проживания']) {
-      const city = b.kv['Город'];
-      const m = b.kv['Даты проживания'].match(/(\d{1,2}\s+[а-яё]+)\s*→\s*(\d{1,2}\s+[а-яё]+)/i);
-      if (!m) continue;
-      const startD = parseRuDate(m[1]);
-      const endD = parseRuDate(m[2]);
+      const rm = b.kv['Даты проживания'].match(/(\d{1,2}\s+[а-яё]+)\s*→\s*(\d{1,2}\s+[а-яё]+)/i);
+      if (!rm) continue;
+      const startD = parseRuDate(rm[1]);
+      const endD = parseRuDate(rm[2]);
       if (!startD || !endD) continue;
-      stays.push({
-        city,
-        hotel: b.kv['Отель'],
-        start: startD,
-        end: endD,
-        raw: b
-      });
+      stays.push({ city: b.kv['Город'], hotel: b.kv['Отель'], start: startD, end: endD });
     }
   }
 
@@ -139,62 +142,35 @@ function parseLocal(md) {
     if (m) cur.kv[m[1].trim()] = m[2].trim();
   }
   if (cur) items.push(cur);
-
   for (const it of items) it.date = parseRuDate(it.dateLabel);
   return items;
 }
 
-function renderLeg(leg) {
+function makeLegItem(leg) {
   const isPlane = leg.kind === 'plane';
-  const badge = isPlane ? `<span class="badge bp">✈</span>` : `<span class="badge bt">🚆</span>`;
-  const iconWrap = isPlane ? 'ip' : 'itr';
-  const iconSvg = isPlane
-    ? `<svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M2 10.5L7 8.5V5a1 1 0 012 0v3.5l5 2v1.5l-5-1v2l1.5 1V15L8 14l-2.5 1v-1.5L7 12.5v-2L2 12v-1.5z" fill="#378ADD"/></svg>`
-    : `<svg class="ic" viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="10" rx="2" stroke="#3B6D11" stroke-width="1.2" fill="none"/><rect x="5" y="4" width="2.5" height="3" rx="0.5" fill="#3B6D11"/><rect x="8.5" y="4" width="2.5" height="3" rx="0.5" fill="#3B6D11"/><line x1="5" y1="9" x2="11" y2="9" stroke="#3B6D11" stroke-width="1"/><line x1="4" y1="12" x2="6.5" y2="12" stroke="#3B6D11" stroke-width="1.2" stroke-linecap="round"/><line x1="9.5" y1="12" x2="12" y2="12" stroke="#3B6D11" stroke-width="1.2" stroke-linecap="round"/></svg>`;
-
-  const main = `${escapeHtml(leg.fromCity)} → ${escapeHtml(leg.toCity)}${badge}`;
-  const sub = `${fmtDateTime(leg.depDate, leg.depTime)} → ${fmtDateTime(leg.arrDate, leg.arrTime)}`;
-
-  return `<div class="leg-section">
-    <div class="leg-row">
-      <div class="lspine"><div class="llt ltravel"></div><div class="liw ${iconWrap}">${iconSvg}</div><div class="llb ltravel"></div></div>
-      <div class="linfo"><div class="lmain">${main}</div><div class="lsub">${escapeHtml(sub)}</div></div>
-    </div>
-  </div>`;
+  return {
+    type: 'leg',
+    kind: leg.kind,
+    fromCity: leg.fromCity,
+    toCity: leg.toCity,
+    depStr: fmtDateTime(leg.depDate, leg.depTime),
+    arrStr: fmtDateTime(leg.arrDate, leg.arrTime),
+    badgeClass: isPlane ? 'bp' : 'bt',
+    badgeIcon: isPlane ? '✈' : '🚆',
+    iconWrapClass: isPlane ? 'ip' : 'itr',
+    iconKind: isPlane ? 'plane' : 'train'
+  };
 }
 
-function renderStay(stay, locals) {
-  const dateRange = `${fmtDate(stay.start)} → ${fmtDate(stay.end)}`;
-  const localsHtml = locals.length
-    ? `<button class="local-btn" onclick="toggleLocal(this)"><span class="arr">▶</span> локальные перемещения</button>
-       <div class="local-panel"><div class="local-inner">
-         ${locals.map(li => {
-           const price = li.kv['Стоимость'] ? `<span class="ltile-price">${escapeHtml(li.kv['Стоимость'])}</span>` : '';
-           const sub = li.kv['Вид транспорта'] ? `${li.kv['Вид транспорта']} · ${li.dateLabel}` : li.dateLabel;
-           return `<div class="ltile">
-             <div class="ltile-head">
-               <div class="ltile-icon ip"><svg class="ic" viewBox="0 0 16 16" fill="none"><path d="M8 2C5.8 2 4 3.8 4 6c0 3 4 8 4 8s4-5 4-8c0-2.2-1.8-4-4-4zm0 5.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" fill="#378ADD"/></svg></div>
-               <div class="ltile-main"><div class="ltile-title">${escapeHtml(li.title)}</div><div class="ltile-sub">${escapeHtml(sub)}</div></div>
-               <div class="ltile-meta">${price}<button class="ltile-expand" onclick="toggleDetail(this)">подробнее</button></div>
-             </div>
-             <div class="ltile-detail"><div class="ltile-detail-inner">
-               ${Object.entries(li.kv).map(([k,v])=>`<div class="drow"><span class="dlbl">${escapeHtml(k)}</span><span class="dval">${escapeHtml(v)}</span></div>`).join('')}
-             </div></div>
-           </div>`;
-         }).join('')}
-       </div></div>`
-    : '';
-
-  return `<div class="city-section">
-    <div class="city-row">
-      <div class="spine"><div class="cdot d-bj"></div><div class="sline lstay" style="height:10px"></div></div>
-      <div class="ccard">
-        <div class="ctitle"><span class="cname">${escapeHtml(stay.city)}</span><span class="cdates">${escapeHtml(dateRange)}</span></div>
-        <div class="chotel">${escapeHtml(stay.hotel)}</div>
-        ${localsHtml}
-      </div>
-    </div>
-  </div>`;
+function makeStayItem(stay, locals) {
+  return {
+    type: 'stay',
+    city: stay.city,
+    hotel: stay.hotel,
+    dateRange: `${fmtDate(stay.start)} → ${fmtDate(stay.end)}`,
+    dotClass: cityDot(stay.city),
+    locals
+  };
 }
 
 export default function () {
@@ -204,34 +180,68 @@ export default function () {
   const locals = parseLocal(localMd);
 
   function localsForStay(stay) {
-    const s = dateKey(stay.start) - 1; // buffer 1 day
+    const s = dateKey(stay.start) - 1;
     const e = dateKey(stay.end) + 1;
-    return locals.filter(li => li.date && dateKey(li.date) >= s && dateKey(li.date) <= e)
-      .filter(li => (`${li.title} ${li.kv['Куда'] || ''} ${li.kv['Откуда'] || ''}`).toLowerCase().includes(stay.city.toLowerCase()));
+    return locals
+      .filter(li => li.date && dateKey(li.date) >= s && dateKey(li.date) <= e)
+      .filter(li => (`${li.title} ${li.kv['Куда'] || ''} ${li.kv['Откуда'] || ''}`).toLowerCase().includes(stay.city.toLowerCase()))
+      .map(li => ({
+        title: li.title,
+        sub: (li.kv['Вид транспорта'] ? `${li.kv['Вид транспорта']} · ` : '') + li.dateLabel,
+        price: li.kv['Стоимость'] || '',
+        details: Object.entries(li.kv).map(([key, value]) => ({ key, value }))
+      }));
   }
 
-  // Build stream: departure card -> legs -> stay when arriving to its city
-  let html = '';
+  // Build flat stream: departure → legs interleaved with stays
+  const stream = [];
+
   if (legs.length) {
     const first = legs[0];
-    html += `<div class="city-section">
-      <div class="city-row">
-        <div class="spine"><div class="cdot d-kja"></div><div class="sline ltravel" style="height:24px"></div></div>
-        <div class="ccard"><div class="ctitle"><span class="cname">${escapeHtml(first.fromCity)}</span><span class="cdates">${escapeHtml(fmtDateTime(first.depDate, first.depTime))}</span></div><div class="chotel" style="padding-bottom:10px">Вылет</div></div>
-      </div>
-    </div>`;
+    stream.push({
+      type: 'departure',
+      city: first.fromCity,
+      datetimeStr: fmtDateTime(first.depDate, first.depTime),
+      dotClass: cityDot(first.fromCity)
+    });
   }
 
   const used = new Set();
   for (const leg of legs) {
-    html += renderLeg(leg);
-    const stay = stays.find(s => !used.has(s) && s.city === leg.toCity && dateKey(s.start) <= dateKey(leg.arrDate) + 1 && dateKey(s.end) >= dateKey(leg.arrDate));
+    stream.push(makeLegItem(leg));
+    const stay = stays.find(s =>
+      !used.has(s) &&
+      s.city === leg.toCity &&
+      dateKey(s.start) <= dateKey(leg.arrDate) + 1 &&
+      dateKey(s.end) >= dateKey(leg.arrDate)
+    );
     if (stay) {
       used.add(stay);
-      html += renderStay(stay, localsForStay(stay));
+      stream.push(makeStayItem(stay, localsForStay(stay)));
     }
   }
 
-  return { html };
-}
+  // Group consecutive legs (no stay between them) into transfer-group cards
+  const items = [];
+  let i = 0;
+  while (i < stream.length) {
+    const item = stream[i];
+    if (item.type === 'leg') {
+      const group = [item];
+      while (i + 1 < stream.length && stream[i + 1].type === 'leg') {
+        i++;
+        group.push(stream[i]);
+      }
+      if (group.length > 1) {
+        items.push({ type: 'transfer-group', legs: group });
+      } else {
+        items.push(item);
+      }
+    } else {
+      items.push(item);
+    }
+    i++;
+  }
 
+  return { items };
+}
