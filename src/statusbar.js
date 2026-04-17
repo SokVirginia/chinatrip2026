@@ -128,11 +128,11 @@
       wrap.innerHTML = `<div class="sb-idle">
         <div class="sb-next-icon">${IC_PLANE}</div>
         <div class="sb-idle-meta">
+          <div class="sb-idle-in">${fmtIn(n.start - now)}</div>
           <div class="sb-idle-lbl">до поездки · следующее</div>
           <div class="sb-idle-title">${n.title}</div>
           <div class="sb-idle-sub">${n.subtitle} · ${n.d[0].v}</div>
         </div>
-        <div class="sb-idle-in">${fmtIn(n.start - now)}</div>
       </div>${renderCheckin(n, now)}`;
       return;
     }
@@ -152,13 +152,13 @@
         <div class="sb-top">
           <div class="sb-icon ${current.iconClass}">${current.icon}</div>
           <div class="sb-meta">
+            <div class="sb-time">
+              <div class="sb-countdown">${remain}</div>
+              <div class="sb-countdown-lbl">${remainLbl}</div>
+            </div>
             <div class="sb-status-lbl">сейчас · ${current.label}</div>
             <div class="sb-title">${current.title}</div>
             <div class="sb-subtitle">${current.subtitle}</div>
-          </div>
-          <div class="sb-time">
-            <div class="sb-countdown">${remain}</div>
-            <div class="sb-countdown-lbl">${remainLbl}</div>
           </div>
         </div>
         <div class="sb-prog-wrap">
@@ -175,11 +175,11 @@
       html += `<div class="sb-next">
         <div class="sb-next-icon">${next.icon}</div>
         <div class="sb-next-meta">
+          <div class="sb-next-in">${fmtIn(next.start - now)}</div>
           <div class="sb-next-lbl">следующее · ${next.label}</div>
           <div class="sb-next-title">${next.title}</div>
           <div class="sb-next-sub">${next.subtitle} · ${next.d[0].v}</div>
         </div>
-        <div class="sb-next-in">${fmtIn(next.start - now)}</div>
       </div>${renderCheckin(next, now)}`;
     }
     wrap.innerHTML = html;
