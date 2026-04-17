@@ -717,6 +717,13 @@ function parseLocalTransportMd(md){
     if(m) cur.kv[m[1].trim()] = m[2].trim();
   }
   if(cur) items.push(cur);
+
+  // Enrich with parsed date for reliable attachment to a stay window.
+  for(const it of items){
+    const d = parseRuDate(it.dateLabel || '');
+    // Use noon UTC+8 to avoid timezone edge cases for all-day matching.
+    it.date = d ? dtUTC8(d.y, d.mo, d.d, 12, 0) : null;
+  }
   return items;
 }
 
@@ -803,15 +810,17 @@ async function buildTimelineFromMd(){
     const {legs,hotels} = parseRouteMd(routeMd);
     const locals = parseLocalTransportMd(localMd);
 
-    // naive city match for locals: use keyword in header
-    const localsByCity = new Map();
-    for(const li of locals){
-      const header = (li.header||'').toLowerCase();
-      const city = ['пекин','чжанцзядзе','фужунчжэнь','шанхай','иркутск','красноярск'].find(c=>header.includes(c));
-      if(!city) continue;
-      const key = city[0].toUpperCase()+city.slice(1);
-      if(!localsByCity.has(key)) localsByCity.set(key,[]);
-      localsByCity.get(key).push(li);
+    function localsForHotel(hotel){
+      // Attach locals by date window (prevents mixing same-city stays on different dates).
+      const start = hotel.start.getTime() - 24*60*60*1000;
+      const end = hotel.end.getTime() + 24*60*60*1000;
+      return locals
+        .filter(li => li.date && li.date.getTime() >= start && li.date.getTime() <= end)
+        .filter(li => {
+          // Soft city check: header/title contains city name (avoid obvious cross-city bleed).
+          const s = `${li.header} ${li.title}`.toLowerCase();
+          return s.includes(hotel.city.toLowerCase());
+        });
     }
 
     // Build stream: legs in order, insert hotel card when we first arrive to its city.
@@ -837,7 +846,7 @@ async function buildTimelineFromMd(){
       const h = hotels.find(hh=>!usedHotels.has(hh) && hh.city===arrivingCity && hh.start.getTime() >= leg.end.getTime() - 24*60*60*1000 && hh.start.getTime() <= leg.end.getTime() + 48*60*60*1000);
       if(h){
         usedHotels.add(h);
-        html += renderCityCard(h, localsByCity.get(h.city));
+        html += renderCityCard(h, localsForHotel(h));
       }
     }
 
