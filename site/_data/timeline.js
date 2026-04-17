@@ -146,6 +146,88 @@ function parseLocal(md) {
   return items;
 }
 
+function buildDays(legs, stays, locals) {
+  const WD_SHORT = ['вс','пн','вт','ср','чт','пт','сб'];
+  const WD_FULL  = ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'];
+  const MO_SHORT = ['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'];
+  const MO_FULL  = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+
+  if (!legs.length) return [];
+
+  const allKeys = [
+    ...legs.flatMap(l => [dateKey(l.depDate), dateKey(l.arrDate)]),
+    ...stays.flatMap(s => [dateKey(s.start), dateKey(s.end)])
+  ];
+  const minKey = Math.min(...allKeys);
+  const maxKey = Math.max(...allKeys);
+
+  function keyToDate(k) {
+    return { y: Math.floor(k / 10000), mo: Math.floor((k % 10000) / 100), d: k % 100 };
+  }
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function fmtTime(t) { return `${pad(t.h)}:${pad(t.mi)}`; }
+
+  const days = [];
+  let cur = keyToDate(minKey);
+  let tripDay = 1;
+
+  while (dateKey(cur) <= maxKey) {
+    const k = dateKey(cur);
+    const jsDate = new Date(Date.UTC(cur.y, cur.mo - 1, cur.d));
+    const events = [];
+
+    for (const leg of legs) {
+      const isPlane = leg.kind === 'plane';
+      const icon = isPlane ? '✈' : '🚄';
+      const iconArr = isPlane ? '🛬' : '🚄';
+      const depK = dateKey(leg.depDate);
+      const arrK = dateKey(leg.arrDate);
+
+      if (depK === k) {
+        if (depK === arrK) {
+          events.push({ icon, text: `${leg.fromCity} → ${leg.toCity}, ${fmtTime(leg.depTime)} – ${fmtTime(leg.arrTime)}`, kind: leg.kind, order: leg.depTime.h * 60 + leg.depTime.mi });
+        } else {
+          events.push({ icon, text: `${leg.fromCity} → ${leg.toCity}, отправление ${fmtTime(leg.depTime)}`, kind: leg.kind, order: leg.depTime.h * 60 + leg.depTime.mi });
+        }
+      }
+      if (arrK === k && arrK !== depK) {
+        events.push({ icon: iconArr, text: `Прибытие: ${leg.toCity}, ${fmtTime(leg.arrTime)}`, kind: leg.kind, order: leg.arrTime.h * 60 + leg.arrTime.mi });
+      }
+    }
+
+    for (const stay of stays) {
+      if (dateKey(stay.start) === k) events.push({ icon: '🏨', text: `Заселение: ${stay.hotel}`, kind: 'hotel', order: 1400 });
+      if (dateKey(stay.end)   === k) events.push({ icon: '📤', text: `Выезд из: ${stay.city}`,  kind: 'hotel', order: 90  });
+    }
+
+    for (const li of locals) {
+      if (li.date && dateKey(li.date) === k) {
+        events.push({ icon: '🚕', text: li.title, kind: 'local', order: 1200 });
+      }
+    }
+
+    events.sort((a, b) => a.order - b.order);
+
+    const activeStay   = stays.find(s => dateKey(s.start) <= k && dateKey(s.end) > k);
+    const arrivingLeg  = legs.find(l => dateKey(l.arrDate) === k && dateKey(l.arrDate) !== dateKey(l.depDate));
+    const departingLeg = legs.find(l => dateKey(l.depDate) === k);
+
+    let city = '';
+    let dotClass = 'd-bj';
+    if (activeStay)        { city = activeStay.city;       dotClass = cityDot(activeStay.city); }
+    else if (arrivingLeg)  { city = arrivingLeg.toCity;    dotClass = cityDot(arrivingLeg.toCity); }
+    else if (departingLeg) { city = departingLeg.fromCity; dotClass = cityDot(departingLeg.fromCity); }
+
+    const isoDate = `${cur.y}-${pad(cur.mo)}-${pad(cur.d)}`;
+    days.push({ isoDate, dayNum: cur.d, monthShort: MO_SHORT[cur.mo - 1], monthFull: MO_FULL[cur.mo - 1], weekday: WD_SHORT[jsDate.getUTCDay()], weekdayFull: WD_FULL[jsDate.getUTCDay()], tripDay, city, dotClass, events, hasEvent: events.length > 0 });
+
+    cur = addDays(cur, 1);
+    tripDay++;
+  }
+
+  return days;
+}
+
 function makeLegItem(leg) {
   const isPlane = leg.kind === 'plane';
   return {
@@ -243,5 +325,6 @@ export default function () {
     i++;
   }
 
-  return { items };
+  const days = buildDays(legs, stays, locals);
+  return { items, days };
 }

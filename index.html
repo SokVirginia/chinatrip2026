@@ -38,12 +38,612 @@
 <div class="rw">
 <div id="sb-wrap" class="sb-wrap"></div>
 
-<div class="stats">
-  <div class="stat"><div class="sv">17</div><div class="sl">дней</div></div>
-  <div class="stat"><div class="sv">4</div><div class="sl">города</div></div>
-  <div class="stat"><div class="sv">6</div><div class="sl">перелётов</div></div>
-  <div class="stat"><div class="sv">3</div><div class="sl">поезда</div></div>
+<div class="ds-wrap">
+  <div class="ds-row" id="day-strip">
+    
+    <button class="ds-pill" data-date="2026-04-18" onclick="selectDay('2026-04-18')">
+      <span class="ds-wd">сб</span>
+      <span class="ds-num">18</span>
+      <span class="ds-mo">апр</span>
+      <span class="ds-bar d-bj"></span>
+      <span class="ds-dot"></span>
+    </button>
+    
+    <button class="ds-pill" data-date="2026-04-19" onclick="selectDay('2026-04-19')">
+      <span class="ds-wd">вс</span>
+      <span class="ds-num">19</span>
+      <span class="ds-mo">апр</span>
+      <span class="ds-bar d-bj"></span>
+      <span class="ds-dot"></span>
+    </button>
+    
+    <button class="ds-pill" data-date="2026-04-20" onclick="selectDay('2026-04-20')">
+      <span class="ds-wd">пн</span>
+      <span class="ds-num">20</span>
+      <span class="ds-mo">апр</span>
+      <span class="ds-bar d-bj"></span>
+      
+    </button>
+    
+    <button class="ds-pill" data-date="2026-04-21" onclick="selectDay('2026-04-21')">
+      <span class="ds-wd">вт</span>
+      <span class="ds-num">21</span>
+      <span class="ds-mo">апр</span>
+      <span class="ds-bar d-bj"></span>
+      
+    </button>
+    
+    <button class="ds-pill" data-date="2026-04-22" onclick="selectDay('2026-04-22')">
+      <span class="ds-wd">ср</span>
+      <span class="ds-num">22</span>
+      <span class="ds-mo">апр</span>
+      <span class="ds-bar d-zjj"></span>
+      <span class="ds-dot"></span>
+    </button>
+    
+    <button class="ds-pill" data-date="2026-04-23" onclick="selectDay('2026-04-23')">
+      <span class="ds-wd">чт</span>
+      <span class="ds-num">23</span>
+      <span class="ds-mo">апр</span>
+      <span class="ds-bar d-zjj"></span>
+      <span class="ds-dot"></span>
+    </button>
+    
+    <button class="ds-pill" data-date="2026-04-24" onclick="selectDay('2026-04-24')">
+      <span class="ds-wd">пт</span>
+      <span class="ds-num">24</span>
+      <span class="ds-mo">апр</span>
+      <span class="ds-bar d-zjj"></span>
+      
+    </button>
+    
+    <button class="ds-pill" data-date="2026-04-25" onclick="selectDay('2026-04-25')">
+      <span class="ds-wd">сб</span>
+      <span class="ds-num">25</span>
+      <span class="ds-mo">апр</span>
+      <span class="ds-bar d-zjj"></span>
+      
+    </button>
+    
+    <button class="ds-pill" data-date="2026-04-26" onclick="selectDay('2026-04-26')">
+      <span class="ds-wd">вс</span>
+      <span class="ds-num">26</span>
+      <span class="ds-mo">апр</span>
+      <span class="ds-bar d-zjj"></span>
+      
+    </button>
+    
+    <button class="ds-pill" data-date="2026-04-27" onclick="selectDay('2026-04-27')">
+      <span class="ds-wd">пн</span>
+      <span class="ds-num">27</span>
+      <span class="ds-mo">апр</span>
+      <span class="ds-bar d-frz"></span>
+      <span class="ds-dot"></span>
+    </button>
+    
+    <button class="ds-pill" data-date="2026-04-28" onclick="selectDay('2026-04-28')">
+      <span class="ds-wd">вт</span>
+      <span class="ds-num">28</span>
+      <span class="ds-mo">апр</span>
+      <span class="ds-bar d-sh"></span>
+      <span class="ds-dot"></span>
+    </button>
+    
+    <button class="ds-pill" data-date="2026-04-29" onclick="selectDay('2026-04-29')">
+      <span class="ds-wd">ср</span>
+      <span class="ds-num">29</span>
+      <span class="ds-mo">апр</span>
+      <span class="ds-bar d-sh"></span>
+      
+    </button>
+    
+    <button class="ds-pill" data-date="2026-04-30" onclick="selectDay('2026-04-30')">
+      <span class="ds-wd">чт</span>
+      <span class="ds-num">30</span>
+      <span class="ds-mo">апр</span>
+      <span class="ds-bar d-sh"></span>
+      
+    </button>
+    
+    <button class="ds-pill" data-date="2026-05-01" onclick="selectDay('2026-05-01')">
+      <span class="ds-wd">пт</span>
+      <span class="ds-num">1</span>
+      <span class="ds-mo">мая</span>
+      <span class="ds-bar d-sh"></span>
+      
+    </button>
+    
+    <button class="ds-pill" data-date="2026-05-02" onclick="selectDay('2026-05-02')">
+      <span class="ds-wd">сб</span>
+      <span class="ds-num">2</span>
+      <span class="ds-mo">мая</span>
+      <span class="ds-bar d-bj"></span>
+      <span class="ds-dot"></span>
+    </button>
+    
+    <button class="ds-pill" data-date="2026-05-03" onclick="selectDay('2026-05-03')">
+      <span class="ds-wd">вс</span>
+      <span class="ds-num">3</span>
+      <span class="ds-mo">мая</span>
+      <span class="ds-bar d-bj"></span>
+      
+    </button>
+    
+    <button class="ds-pill" data-date="2026-05-04" onclick="selectDay('2026-05-04')">
+      <span class="ds-wd">пн</span>
+      <span class="ds-num">4</span>
+      <span class="ds-mo">мая</span>
+      <span class="ds-bar d-bj"></span>
+      <span class="ds-dot"></span>
+    </button>
+    
+  </div>
+
+  <div class="ds-panel-area">
+    
+    <div class="ds-panel" id="day-2026-04-18" hidden>
+      <div class="ds-panel-head">
+        <div class="ds-panel-date">
+          <span class="ds-panel-tripday">День 1</span>
+          <span class="ds-panel-full">18 апреля, суббота</span>
+        </div>
+        
+        <span class="ds-panel-city">
+          <span class="ds-city-dot d-bj"></span>Пекин
+        </span>
+        
+      </div>
+      
+      <div class="ds-events">
+        
+        <div class="ds-ev ds-ev-plane">
+          <span class="ds-ev-icon">✈</span>
+          <span class="ds-ev-text">Красноярск → Иркутск, 21:05 – 23:45</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-hotel">
+          <span class="ds-ev-icon">🏨</span>
+          <span class="ds-ev-text">Заселение: Jialong Hotel (Beijing Chaoyangmen)</span>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+    <div class="ds-panel" id="day-2026-04-19" hidden>
+      <div class="ds-panel-head">
+        <div class="ds-panel-date">
+          <span class="ds-panel-tripday">День 2</span>
+          <span class="ds-panel-full">19 апреля, воскресенье</span>
+        </div>
+        
+        <span class="ds-panel-city">
+          <span class="ds-city-dot d-bj"></span>Пекин
+        </span>
+        
+      </div>
+      
+      <div class="ds-events">
+        
+        <div class="ds-ev ds-ev-plane">
+          <span class="ds-ev-icon">✈</span>
+          <span class="ds-ev-text">Иркутск → Пекин, 01:40 – 04:35</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-local">
+          <span class="ds-ev-icon">🚕</span>
+          <span class="ds-ev-text">Аэропорт PKX → Отель (Пекин)</span>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+    <div class="ds-panel" id="day-2026-04-20" hidden>
+      <div class="ds-panel-head">
+        <div class="ds-panel-date">
+          <span class="ds-panel-tripday">День 3</span>
+          <span class="ds-panel-full">20 апреля, понедельник</span>
+        </div>
+        
+        <span class="ds-panel-city">
+          <span class="ds-city-dot d-bj"></span>Пекин
+        </span>
+        
+      </div>
+      
+      <div class="ds-empty">Свободный день · Пекин</div>
+      
+    </div>
+    
+    <div class="ds-panel" id="day-2026-04-21" hidden>
+      <div class="ds-panel-head">
+        <div class="ds-panel-date">
+          <span class="ds-panel-tripday">День 4</span>
+          <span class="ds-panel-full">21 апреля, вторник</span>
+        </div>
+        
+        <span class="ds-panel-city">
+          <span class="ds-city-dot d-bj"></span>Пекин
+        </span>
+        
+      </div>
+      
+      <div class="ds-empty">Свободный день · Пекин</div>
+      
+    </div>
+    
+    <div class="ds-panel" id="day-2026-04-22" hidden>
+      <div class="ds-panel-head">
+        <div class="ds-panel-date">
+          <span class="ds-panel-tripday">День 5</span>
+          <span class="ds-panel-full">22 апреля, среда</span>
+        </div>
+        
+        <span class="ds-panel-city">
+          <span class="ds-city-dot d-zjj"></span>Чжанцзядзе
+        </span>
+        
+      </div>
+      
+      <div class="ds-events">
+        
+        <div class="ds-ev ds-ev-hotel">
+          <span class="ds-ev-icon">📤</span>
+          <span class="ds-ev-text">Выезд из: Пекин</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-train">
+          <span class="ds-ev-icon">🚄</span>
+          <span class="ds-ev-text">Пекин → Чжанцзядзе, отправление 11:14</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-local">
+          <span class="ds-ev-icon">🚕</span>
+          <span class="ds-ev-text">Отель (Пекин) → Вокзал Beijing West</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-hotel">
+          <span class="ds-ev-icon">🏨</span>
+          <span class="ds-ev-text">Заселение: Qiquan Homestay</span>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+    <div class="ds-panel" id="day-2026-04-23" hidden>
+      <div class="ds-panel-head">
+        <div class="ds-panel-date">
+          <span class="ds-panel-tripday">День 6</span>
+          <span class="ds-panel-full">23 апреля, четверг</span>
+        </div>
+        
+        <span class="ds-panel-city">
+          <span class="ds-city-dot d-zjj"></span>Чжанцзядзе
+        </span>
+        
+      </div>
+      
+      <div class="ds-events">
+        
+        <div class="ds-ev ds-ev-train">
+          <span class="ds-ev-icon">🚄</span>
+          <span class="ds-ev-text">Прибытие: Чжанцзядзе, 05:20</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-local">
+          <span class="ds-ev-icon">🚕</span>
+          <span class="ds-ev-text">Вокзал Zhangjiajie West → Отель (Чжанцзядзе)</span>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+    <div class="ds-panel" id="day-2026-04-24" hidden>
+      <div class="ds-panel-head">
+        <div class="ds-panel-date">
+          <span class="ds-panel-tripday">День 7</span>
+          <span class="ds-panel-full">24 апреля, пятница</span>
+        </div>
+        
+        <span class="ds-panel-city">
+          <span class="ds-city-dot d-zjj"></span>Чжанцзядзе
+        </span>
+        
+      </div>
+      
+      <div class="ds-empty">Свободный день · Чжанцзядзе</div>
+      
+    </div>
+    
+    <div class="ds-panel" id="day-2026-04-25" hidden>
+      <div class="ds-panel-head">
+        <div class="ds-panel-date">
+          <span class="ds-panel-tripday">День 8</span>
+          <span class="ds-panel-full">25 апреля, суббота</span>
+        </div>
+        
+        <span class="ds-panel-city">
+          <span class="ds-city-dot d-zjj"></span>Чжанцзядзе
+        </span>
+        
+      </div>
+      
+      <div class="ds-empty">Свободный день · Чжанцзядзе</div>
+      
+    </div>
+    
+    <div class="ds-panel" id="day-2026-04-26" hidden>
+      <div class="ds-panel-head">
+        <div class="ds-panel-date">
+          <span class="ds-panel-tripday">День 9</span>
+          <span class="ds-panel-full">26 апреля, воскресенье</span>
+        </div>
+        
+        <span class="ds-panel-city">
+          <span class="ds-city-dot d-zjj"></span>Чжанцзядзе
+        </span>
+        
+      </div>
+      
+      <div class="ds-empty">Свободный день · Чжанцзядзе</div>
+      
+    </div>
+    
+    <div class="ds-panel" id="day-2026-04-27" hidden>
+      <div class="ds-panel-head">
+        <div class="ds-panel-date">
+          <span class="ds-panel-tripday">День 10</span>
+          <span class="ds-panel-full">27 апреля, понедельник</span>
+        </div>
+        
+        <span class="ds-panel-city">
+          <span class="ds-city-dot d-frz"></span>Фужунчжэнь
+        </span>
+        
+      </div>
+      
+      <div class="ds-events">
+        
+        <div class="ds-ev ds-ev-hotel">
+          <span class="ds-ev-icon">📤</span>
+          <span class="ds-ev-text">Выезд из: Чжанцзядзе</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-train">
+          <span class="ds-ev-icon">🚄</span>
+          <span class="ds-ev-text">Чжанцзядзе → Фужунчжэнь, 12:47 – 13:10</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-local">
+          <span class="ds-ev-icon">🚕</span>
+          <span class="ds-ev-text">Отель (Чжанцзядзе) → Вокзал Zhangjiajie West → Вокзал Furongzhen</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-local">
+          <span class="ds-ev-icon">🚕</span>
+          <span class="ds-ev-text">Вокзал Furongzhen → Отель (Фужунчжэнь)</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-hotel">
+          <span class="ds-ev-icon">🏨</span>
+          <span class="ds-ev-text">Заселение: Xuanyuan Viewing Courtyard B&amp;B (Furong Town Scenic Area Branch)</span>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+    <div class="ds-panel" id="day-2026-04-28" hidden>
+      <div class="ds-panel-head">
+        <div class="ds-panel-date">
+          <span class="ds-panel-tripday">День 11</span>
+          <span class="ds-panel-full">28 апреля, вторник</span>
+        </div>
+        
+        <span class="ds-panel-city">
+          <span class="ds-city-dot d-sh"></span>Шанхай
+        </span>
+        
+      </div>
+      
+      <div class="ds-events">
+        
+        <div class="ds-ev ds-ev-hotel">
+          <span class="ds-ev-icon">📤</span>
+          <span class="ds-ev-text">Выезд из: Фужунчжэнь</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-train">
+          <span class="ds-ev-icon">🚄</span>
+          <span class="ds-ev-text">Фужунчжэнь → Чжанцзядзе, 12:05 – 12:28</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-plane">
+          <span class="ds-ev-icon">✈</span>
+          <span class="ds-ev-text">Чжанцзядзе → Шанхай, 16:25 – 18:30</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-local">
+          <span class="ds-ev-icon">🚕</span>
+          <span class="ds-ev-text">Отель (Фужунчжэнь) → Вокзал Furongzhen</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-local">
+          <span class="ds-ev-icon">🚕</span>
+          <span class="ds-ev-text">Вокзал Zhangjiajie West → Аэропорт DYG</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-local">
+          <span class="ds-ev-icon">🚕</span>
+          <span class="ds-ev-text">Аэропорт PVG → Отель (Шанхай)</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-hotel">
+          <span class="ds-ev-icon">🏨</span>
+          <span class="ds-ev-text">Заселение: Heyitang Hotel Shanghai International Tourism Resort</span>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+    <div class="ds-panel" id="day-2026-04-29" hidden>
+      <div class="ds-panel-head">
+        <div class="ds-panel-date">
+          <span class="ds-panel-tripday">День 12</span>
+          <span class="ds-panel-full">29 апреля, среда</span>
+        </div>
+        
+        <span class="ds-panel-city">
+          <span class="ds-city-dot d-sh"></span>Шанхай
+        </span>
+        
+      </div>
+      
+      <div class="ds-empty">Свободный день · Шанхай</div>
+      
+    </div>
+    
+    <div class="ds-panel" id="day-2026-04-30" hidden>
+      <div class="ds-panel-head">
+        <div class="ds-panel-date">
+          <span class="ds-panel-tripday">День 13</span>
+          <span class="ds-panel-full">30 апреля, четверг</span>
+        </div>
+        
+        <span class="ds-panel-city">
+          <span class="ds-city-dot d-sh"></span>Шанхай
+        </span>
+        
+      </div>
+      
+      <div class="ds-empty">Свободный день · Шанхай</div>
+      
+    </div>
+    
+    <div class="ds-panel" id="day-2026-05-01" hidden>
+      <div class="ds-panel-head">
+        <div class="ds-panel-date">
+          <span class="ds-panel-tripday">День 14</span>
+          <span class="ds-panel-full">1 мая, пятница</span>
+        </div>
+        
+        <span class="ds-panel-city">
+          <span class="ds-city-dot d-sh"></span>Шанхай
+        </span>
+        
+      </div>
+      
+      <div class="ds-empty">Свободный день · Шанхай</div>
+      
+    </div>
+    
+    <div class="ds-panel" id="day-2026-05-02" hidden>
+      <div class="ds-panel-head">
+        <div class="ds-panel-date">
+          <span class="ds-panel-tripday">День 15</span>
+          <span class="ds-panel-full">2 мая, суббота</span>
+        </div>
+        
+        <span class="ds-panel-city">
+          <span class="ds-city-dot d-bj"></span>Пекин
+        </span>
+        
+      </div>
+      
+      <div class="ds-events">
+        
+        <div class="ds-ev ds-ev-hotel">
+          <span class="ds-ev-icon">📤</span>
+          <span class="ds-ev-text">Выезд из: Шанхай</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-plane">
+          <span class="ds-ev-icon">✈</span>
+          <span class="ds-ev-text">Шанхай → Пекин, 15:30 – 17:40</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-local">
+          <span class="ds-ev-icon">🚕</span>
+          <span class="ds-ev-text">Отель (Шанхай) → Аэропорт SHA Hongqiao</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-local">
+          <span class="ds-ev-icon">🚕</span>
+          <span class="ds-ev-text">Аэропорт PKX → Отель (Пекин, Дасин)</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-hotel">
+          <span class="ds-ev-icon">🏨</span>
+          <span class="ds-ev-text">Заселение: James Joyce Coffetel Hotel (Beijing Daxing International Airport Store 2)</span>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+    <div class="ds-panel" id="day-2026-05-03" hidden>
+      <div class="ds-panel-head">
+        <div class="ds-panel-date">
+          <span class="ds-panel-tripday">День 16</span>
+          <span class="ds-panel-full">3 мая, воскресенье</span>
+        </div>
+        
+        <span class="ds-panel-city">
+          <span class="ds-city-dot d-bj"></span>Пекин
+        </span>
+        
+      </div>
+      
+      <div class="ds-empty">Свободный день · Пекин</div>
+      
+    </div>
+    
+    <div class="ds-panel" id="day-2026-05-04" hidden>
+      <div class="ds-panel-head">
+        <div class="ds-panel-date">
+          <span class="ds-panel-tripday">День 17</span>
+          <span class="ds-panel-full">4 мая, понедельник</span>
+        </div>
+        
+        <span class="ds-panel-city">
+          <span class="ds-city-dot d-bj"></span>Пекин
+        </span>
+        
+      </div>
+      
+      <div class="ds-events">
+        
+        <div class="ds-ev ds-ev-hotel">
+          <span class="ds-ev-icon">📤</span>
+          <span class="ds-ev-text">Выезд из: Пекин</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-plane">
+          <span class="ds-ev-icon">✈</span>
+          <span class="ds-ev-text">Пекин → Иркутск, 05:35 – 08:45</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-plane">
+          <span class="ds-ev-icon">✈</span>
+          <span class="ds-ev-text">Иркутск → Красноярск, 19:50 – 20:30</span>
+        </div>
+        
+        <div class="ds-ev ds-ev-local">
+          <span class="ds-ev-icon">🚕</span>
+          <span class="ds-ev-text">Отель (Пекин, Дасин) → Аэропорт PKX</span>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+  </div>
 </div>
+
 
 <div class="timeline">
   
@@ -1303,6 +1903,7 @@ window.addEventListener('load',()=>{
 
 window.PWA?.registerPwa?.();
 window.Statusbar?.init?.();
+window.initDayStrip?.();
 </script>
 </body>
 </html>

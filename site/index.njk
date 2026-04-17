@@ -38,12 +38,7 @@
 <div class="rw">
 <div id="sb-wrap" class="sb-wrap"></div>
 
-<div class="stats">
-  <div class="stat"><div class="sv">17</div><div class="sl">дней</div></div>
-  <div class="stat"><div class="sv">4</div><div class="sl">города</div></div>
-  <div class="stat"><div class="sv">6</div><div class="sl">перелётов</div></div>
-  <div class="stat"><div class="sv">3</div><div class="sl">поезда</div></div>
-</div>
+{% include "partials/day-strip.njk" %}
 
 <div class="timeline">
   {% for item in timeline.items %}
@@ -127,6 +122,7 @@ window.addEventListener('load',()=>{
 
 window.PWA?.registerPwa?.();
 window.Statusbar?.init?.();
+window.initDayStrip?.();
 </script>
 </body>
 </html>

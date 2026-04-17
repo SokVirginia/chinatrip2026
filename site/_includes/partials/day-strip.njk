@@ -1,0 +1,43 @@
+<div class="ds-wrap">
+  <div class="ds-row" id="day-strip">
+    {% for day in timeline.days %}
+    <button class="ds-pill" data-date="{{ day.isoDate }}" onclick="selectDay('{{ day.isoDate }}')">
+      <span class="ds-wd">{{ day.weekday }}</span>
+      <span class="ds-num">{{ day.dayNum }}</span>
+      <span class="ds-mo">{{ day.monthShort }}</span>
+      <span class="ds-bar {{ day.dotClass }}"></span>
+      {% if day.hasEvent %}<span class="ds-dot"></span>{% endif %}
+    </button>
+    {% endfor %}
+  </div>
+
+  <div class="ds-panel-area">
+    {% for day in timeline.days %}
+    <div class="ds-panel" id="day-{{ day.isoDate }}" hidden>
+      <div class="ds-panel-head">
+        <div class="ds-panel-date">
+          <span class="ds-panel-tripday">День {{ day.tripDay }}</span>
+          <span class="ds-panel-full">{{ day.dayNum }} {{ day.monthFull }}, {{ day.weekdayFull }}</span>
+        </div>
+        {% if day.city %}
+        <span class="ds-panel-city">
+          <span class="ds-city-dot {{ day.dotClass }}"></span>{{ day.city }}
+        </span>
+        {% endif %}
+      </div>
+      {% if day.events | length %}
+      <div class="ds-events">
+        {% for ev in day.events %}
+        <div class="ds-ev ds-ev-{{ ev.kind }}">
+          <span class="ds-ev-icon">{{ ev.icon }}</span>
+          <span class="ds-ev-text">{{ ev.text }}</span>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="ds-empty">Свободный день{% if day.city %} · {{ day.city }}{% endif %}</div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
