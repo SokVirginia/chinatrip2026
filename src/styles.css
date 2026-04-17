@@ -163,8 +163,8 @@ svg.ic{width:16px;height:16px;display:block}
 .ltile-info{display:flex;flex-direction:column;gap:2px}
 .ltile-title{font-size:13px;font-weight:600;color:var(--tx)}
 .ltile-sub{font-size:11px;color:var(--tx3)}
-.ltile-meta{display:flex;flex-direction:column;gap:8px;align-items:flex-start;flex-shrink:0}
-.ltile-price{font-size:12px;font-weight:500;color:var(--tx2);white-space:nowrap}
+.ltile-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;flex-shrink:0}
+.ltile-price{font-size:12px;font-weight:500;color:var(--tx2);white-space:normal;word-break:break-word}
 .ltile-expand{
   font-size:10px;font-weight:600;color:var(--tx2);
   padding:4px 10px;border:none;
@@ -172,6 +172,7 @@ svg.ic{width:16px;height:16px;display:block}
   transition:all .2s ease;white-space:nowrap;
   background:var(--bg2);box-shadow:var(--sh-sm);font-family:var(--f);
   width:fit-content;
+  flex-shrink:0;
 }
 .ltile-expand:active{transform:scale(0.96);box-shadow:var(--sh-in-sm)}
 .ltile-detail{max-height:0;overflow:hidden;transition:max-height .25s ease}
