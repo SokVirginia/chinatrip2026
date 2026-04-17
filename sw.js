@@ -1,9 +1,15 @@
 /* Service worker for offline support and fast updates */
-const VERSION = 'v1';
+const VERSION = 'v2';
 const STATIC_CACHE = `chinatrip-static-${VERSION}`;
 
 // App shell (important for GitHub Pages / non-root hosting)
-const PRECACHE_URLS = ['./', './index.html'];
+const PRECACHE_URLS = [
+  './',
+  './index.html',
+  './sw.js',
+  './data/marshrut-kitay-v11.md',
+  './data/local-transport.md'
+];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
