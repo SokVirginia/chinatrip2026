@@ -175,8 +175,8 @@ svg.ic{width:16px;height:16px;display:block}
   flex-shrink:0;
 }
 .ltile-expand:active{transform:scale(0.96);box-shadow:var(--sh-in-sm)}
-.ltile-detail{max-height:0;overflow:hidden;transition:max-height .25s ease}
-.ltile-detail.open{max-height:500px}
+.ltile-detail{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.ltile-detail.open{max-height:3000px}
 .ltile-detail-inner{padding:12px 14px;border-top:1px solid var(--br);display:flex;flex-direction:column;gap:8px}
 .drow{display:flex;flex-direction:column;gap:2px;padding:0;font-size:12px;border:none}
 .dlbl{color:var(--tx3);font-size:11px}
