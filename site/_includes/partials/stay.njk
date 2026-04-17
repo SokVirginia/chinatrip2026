@@ -12,14 +12,16 @@
       <div class="chotel">{{ stay.hotel }}</div>
       {% if stay.locals | length %}
       <button class="local-btn" onclick="toggleLocal(this)"><span class="arr">▶</span> локальные перемещения</button>
-      <div class="local-panel">
-        <div class="local-inner">
-          {% for tile in stay.locals %}
-          {% include "partials/local-tile.njk" %}
-          {% endfor %}
-        </div>
-      </div>
       {% endif %}
     </div>
   </div>
+  {% if stay.locals | length %}
+  <div class="local-panel">
+    <div class="local-inner">
+      {% for tile in stay.locals %}
+      {% include "partials/local-tile.njk" %}
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
 </div>
