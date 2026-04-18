@@ -1,5 +1,5 @@
 /* Service worker for offline support and fast updates */
-const VERSION = 'v7';
+const VERSION = 'v8';
 const STATIC_CACHE = `chinatrip-static-${VERSION}`;
 
 const PRECACHE_URLS = [
